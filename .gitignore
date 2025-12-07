@@ -1,0 +1,26 @@
+# Gitignore for Node.js
+node_modules/
+dist/
+build/
+*.log
+.env*
+
+# Gitignore for Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+*.egg-info/
+
+# Gitignore for Docusaurus
+.docusaurus/
+.docusaurus_build/
+
+# Universal ignores
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
