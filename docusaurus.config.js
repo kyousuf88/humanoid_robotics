@@ -218,23 +218,25 @@
 module.exports = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'AI Systems in the Physical World',
-  url: 'https://github.com/kyousuf88/humanoid_robotics', // GitHub Pages URL
-  baseUrl: '/humanoid_robotics/',                // repository name
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  url: 'https://kyousuf88.github.io',
+  baseUrl: '/humanoid_robotics/',
   favicon: 'img/favicon.ico',
-  organizationName: 'kyousuf88', // GitHub username or org
-  projectName: 'humanoid_robotics',         // repo name
+  organizationName: 'kyousuf88',
+  projectName: 'humanoid_robotics',
   trailingSlash: false,
-  deploymentBranch: 'gh-pages',             // branch GitHub Pages will serve
-  themes: ['@docusaurus/theme-classic'],
+  deploymentBranch: 'gh-pages',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
   presets: [
     [
       '@docusaurus/preset-classic',
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          routeBasePath: '/', // serve docs at the root
+          routeBasePath: '/',
         },
         blog: false,
         theme: {
@@ -244,3 +246,4 @@ module.exports = {
     ],
   ],
 };
+

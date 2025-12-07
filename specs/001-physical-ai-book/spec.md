@@ -45,7 +45,7 @@ Core Requirements:
 - Include Python-based ROS 2 examples using rclpy.
 - Provide clear explanations of URDF for humanoid robots.
 - Include diagrams, conceptual illustrations, and code blocks.
-- Accuracy aligned with ROS 2 Humble or Iron.
+- Accuracy aligned with ROS 2 Humble Hawksbill (LTS).
 
 Chapters:
 1. Introduction to Physical AI & Robotics Foundations
@@ -75,9 +75,9 @@ Explain simulation workflows using Gazebo and Unity to create a robust digital t
 
 Core Requirements:
 - Explain digital twin concepts for robotics.
-- Provide Gazebo + Unity installation and setup instructions.
+- Provide Gazebo (physics simulation) + Unity (high-fidelity visualization) installation and setup instructions.
 - Demonstrate SDF/URDF usage and conversions.
-- Include sensor simulation (LiDAR, IMU, Depth Cameras).
+- Include sensor simulation (LiDAR, IMU, Depth Cameras) in Gazebo.
 - Cover ROS–Gazebo and ROS–Unity integration.
 - Provide environment-building examples and best practices.
 
@@ -109,11 +109,11 @@ Objective:
 Teach perception, synthetic data creation, navigation, and reinforcement learning for humanoid robotics using NVIDIA Isaac Sim + Isaac ROS.
 
 Core Requirements:
-- Explain the Isaac ecosystem (Sim, SDK, Omniverse).
+- Explain the Isaac ecosystem (Isaac Sim, Isaac ROS, Omniverse).
 - Provide photorealistic simulation workflows.
 - Include synthetic data pipelines and domain randomization.
 - Cover Isaac ROS perception systems: VSLAM, stereo depth, object detection.
-- Include navigation using Nav2 with humanoid constraints.
+- Include navigation using Nav2 with humanoid-specific constraints (bipedal locomotion, balance, step planning).
 - Provide reinforcement learning examples and sim-to-real transfer tips.
 
 Chapters:
@@ -145,7 +145,7 @@ Explain how LLMs, Whisper, and multi-modal AI enable natural interaction and cog
 
 Core Requirements:
 - Introduce VLA foundations in robotics.
-- Provide Voice-to-Action pipeline using Whisper + ROS 2.
+- Provide Voice-to-Action pipeline using Whisper + Open Source LLM (e.g., Llama 3) + ROS 2.
 - Demonstrate LLM-based cognitive planning (task decomposition).
 - Cover multi-modal interaction (vision, language, gestures, proprioception).
 - Define the Capstone Architecture (Voice → Plan → Navigate → Detect → Manipulate).
@@ -296,6 +296,17 @@ The user, as a robotics student, wants to understand how LLMs, Whisper, and mult
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
+
+## Clarifications
+
+### Session 2025-12-07
+
+- Q: Which specific ROS 2 distribution should the book target? → A: ROS 2 Humble Hawksbill
+- Q: Which NVIDIA Isaac tools should be the primary focus? → A: NVIDIA Isaac Sim + Isaac ROS
+- Q: What are the distinct roles of Gazebo vs Unity in the book? → A: Gazebo for physics simulation, Unity for high-fidelity visualization
+- Q: Which LLM should be used with Whisper for the VLA system? → A: Open Source LLM (e.g., Llama 3)
+- Q: What type of navigation should be emphasized? → A: Humanoid-specific navigation with bipedal locomotion constraints
+
 
 - **SC-001**: The published Docusaurus book compiles without warnings or broken links.
 - **SC-002**: The book successfully deploys to GitHub Pages and is publicly accessible.

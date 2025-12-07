@@ -110,3 +110,48 @@
     - `model_size`: String (e.g., "small", "base", "large")
     - `language_support`: List of languages
 - **Relationships**: Used by VLA for Voice-to-Action pipeline.
+
+## Validation Rules
+
+### Book-Level Validation
+- `length` must be between 30,000 and 50,000 words
+- `chapters_count` must be between 10 and 20
+- At least 40% of sources must be peer-reviewed academic references
+- All content must pass plagiarism check (0% tolerance)
+- Flesch-Kincaid grade level must be between 9-12
+
+### Module-Level Validation
+- Each module must have a clear `objective`
+- Modules must follow the defined thematic structure
+- Module titles must align with the spec
+
+### Chapter-Level Validation
+- `content` length should be appropriate for 2,000-5,000 words
+- Each chapter must have 2-3 learning objectives
+- Each chapter must have at least 3 code examples (for ROS 2 modules)
+- All `code_examples` must be syntactically valid and tested
+- All `diagrams` must be stored under `/static/img/book/`
+- All factual claims must map to a source in `sources`
+
+### Citation-Level Validation
+- All citations in `sources` must follow APA format
+- At least 40% of sources must be peer-reviewed academic references
+- All URLs in citations must be valid and accessible
+
+## State Transitions
+
+### Chapter States
+- Draft → In Progress: When writing begins
+- In Progress → Complete: When initial draft is finished
+- Complete → Reviewed: When quality validation is passed
+- Reviewed → Published: When integrated into final book
+
+### Module States
+- Planned → In Progress: When first chapter starts
+- In Progress → Complete: When all chapters are reviewed
+- Complete → Published: When integrated into final book
+
+### Book States
+- Draft → In Progress: When first module starts
+- In Progress → Complete: When all modules are complete
+- Complete → Published: When deployed to GitHub Pages

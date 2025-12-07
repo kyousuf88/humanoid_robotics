@@ -1,0 +1,63 @@
+HUMAN CHECKS REPORT
+==================================================
+
+Files analyzed: 22
+Files: appendix.md, chapter-1.md, chapter-2.md, chapter-3.md, chapter-4.md, ...
+
+TECHNICAL RIGOR ASSESSMENT:
+  ✓ Appears technically rigorous
+
+CONTENT QUALITY ASSESSMENT:
+  ✓ Content appears to be of good quality
+
+FORMATTING CONSISTENCY ASSESSMENT:
+  Issues found: 11
+    - .\docs\appendix.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-1\chapter-1.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-1\chapter-2.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-1\chapter-3.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-1\chapter-4.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-1\chapter-5.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-2\chapter-1.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-2\chapter-2.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-2\chapter-3.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\module-2\chapter-4.md: Learning Objectives section found but no checklist items in proper format
+    - .\docs\preface.md: Learning Objectives section found but no checklist items in proper format
+
+PROOFREADING ASSESSMENT:
+  Issues found: 22
+    - .\docs\appendix.md: Lines [15, 21, 236, 249] are very long (>120 chars) - may affect readability
+    - .\docs\module-1\chapter-1.md: Lines [10, 16, 18, 20, 24] are very long (>120 chars) - may affect readability
+    - .\docs\module-1\chapter-2.md: 131 instances of multiple consecutive spaces, 7 missing spaces after periods, Lines [18, 20, 24, 30, 32] are very long (>120 chars) - may affect readability
+    - .\docs\module-1\chapter-3.md: 360 instances of multiple consecutive spaces, 2 missing spaces after periods, Lines [19, 21, 25, 55, 325] are very long (>120 chars) - may affect readability
+    - .\docs\module-1\chapter-4.md: 530 instances of multiple consecutive spaces, Lines [19, 21, 25, 193, 810] are very long (>120 chars) - may affect readability
+    - .\docs\module-1\chapter-5.md: 522 instances of multiple consecutive spaces, 38 missing spaces after periods, Lines [19, 21, 25, 49, 118] are very long (>120 chars) - may affect readability
+    - .\docs\module-2\chapter-1.md: 158 instances of multiple consecutive spaces, Lines [16, 18, 20, 88, 133] are very long (>120 chars) - may affect readability
+    - .\docs\module-2\chapter-2.md: 1120 instances of multiple consecutive spaces, Lines [18, 20, 22, 30, 32] are very long (>120 chars) - may affect readability
+    - .\docs\module-2\chapter-3.md: 912 instances of multiple consecutive spaces, 21 missing spaces after periods, Lines [18, 20, 22, 28, 70] are very long (>120 chars) - may affect readability
+    - .\docs\module-2\chapter-4.md: 1007 instances of multiple consecutive spaces, 128 missing spaces after periods, Lines [18, 20, 27, 1300, 1304] are very long (>120 chars) - may affect readability
+    - .\docs\module-2\chapter-5.md: 1043 instances of multiple consecutive spaces, 63 missing spaces after periods, Lines [18, 20, 26, 28, 36] are very long (>120 chars) - may affect readability
+    - .\docs\module-3\chapter-1.md: 572 instances of multiple consecutive spaces, 75 missing spaces after periods, Lines [18, 20, 22, 30, 32] are very long (>120 chars) - may affect readability
+    - .\docs\module-3\chapter-2.md: 909 instances of multiple consecutive spaces, 82 missing spaces after periods, Lines [18, 20, 22, 28, 516] are very long (>120 chars) - may affect readability
+    - .\docs\module-3\chapter-3.md: 699 instances of multiple consecutive spaces, Lines [20, 22, 24, 26, 32] are very long (>120 chars) - may affect readability
+    - .\docs\module-3\chapter-4.md: 956 instances of multiple consecutive spaces, Lines [20, 22, 24, 26, 32] are very long (>120 chars) - may affect readability
+    - .\docs\module-3\chapter-5.md: 1315 instances of multiple consecutive spaces, 44 missing spaces after periods, Lines [20, 22, 24, 26, 32] are very long (>120 chars) - may affect readability
+    - .\docs\module-4\chapter-1.md: 368 instances of multiple consecutive spaces, 11 missing spaces after periods, Lines [11, 12, 20, 22, 24] are very long (>120 chars) - may affect readability
+    - .\docs\module-4\chapter-2.md: 1148 instances of multiple consecutive spaces, 18 missing spaces after periods, Lines [20, 22, 24, 26, 32] are very long (>120 chars) - may affect readability
+    - .\docs\module-4\chapter-3.md: 1637 instances of multiple consecutive spaces, 11 missing spaces after periods, Lines [20, 22, 24, 26, 32] are very long (>120 chars) - may affect readability
+    - .\docs\module-4\chapter-4.md: 1950 instances of multiple consecutive spaces, 27 missing spaces after periods, Lines [11, 20, 22, 24, 26] are very long (>120 chars) - may affect readability
+    - .\docs\module-4\chapter-5.md: 2171 instances of multiple consecutive spaces, 13 missing spaces after periods, Lines [20, 30, 32, 38, 40] are very long (>120 chars) - may affect readability
+    - .\docs\preface.md: Lines [15, 17, 19, 32, 55] are very long (>120 chars) - may affect readability
+
+COMPLETENESS ASSESSMENT:
+  Modules found: 4/4
+  Total chapters: 20/20
+  Modules: ['1', '2', '3', '4']
+    Module 1: 5/5 chapters (['1', '2', '3', '4', '5'])
+    Module 2: 5/5 chapters (['1', '2', '3', '4', '5'])
+    Module 3: 5/5 chapters (['1', '2', '3', '4', '5'])
+    Module 4: 5/5 chapters (['1', '2', '3', '4', '5'])
+
+OVERALL ASSESSMENT:
+  ? Found 33 issues that may benefit from human review.
+  Manual review is recommended for technical accuracy and content quality.

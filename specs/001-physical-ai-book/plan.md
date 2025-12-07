@@ -23,12 +23,35 @@ The book will follow a modular structure:
 The Docusaurus project will be structured as follows:
 ```
 ├── docs/
+│   ├── preface.md
+│   ├── appendix.md
 │   ├── module-1/
 │   │   ├── chapter-1.md
 │   │   ├── chapter-2.md
+│   │   ├── chapter-3.md
+│   │   ├── chapter-4.md
+│   │   ├── chapter-5.md
 │   │   └── ...
 │   ├── module-2/
 │   │   ├── chapter-1.md
+│   │   ├── chapter-2.md
+│   │   ├── chapter-3.md
+│   │   ├── chapter-4.md
+│   │   ├── chapter-5.md
+│   │   └── ...
+│   ├── module-3/
+│   │   ├── chapter-1.md
+│   │   ├── chapter-2.md
+│   │   ├── chapter-3.md
+│   │   ├── chapter-4.md
+│   │   ├── chapter-5.md
+│   │   └── ...
+│   ├── module-4/
+│   │   ├── chapter-1.md
+│   │   ├── chapter-2.md
+│   │   ├── chapter-3.md
+│   │   ├── chapter-4.md
+│   │   ├── chapter-5.md
 │   │   └── ...
 │   └── ...
 ├── src/
@@ -36,9 +59,26 @@ The Docusaurus project will be structured as follows:
 ├── static/
 │   ├── img/
 │   │   └── book/ (all book images, as per constitution)
+│   │       ├── module-1/
+│   │       │   └── (images for module 1 chapters)
+│   │       ├── module-2/
+│   │       │   └── (images for module 2 chapters)
+│   │       ├── module-3/
+│   │       │   └── (images for module 3 chapters)
+│   │       └── module-4/
+│   │           └── (images for module 4 chapters)
 │   └── ...
+├── templates/
+│   └── chapter-template.md (template for all chapters)
+├── .specify/
+│   └── templates/
+│       └── chapter-template.md (specification template)
+├── .github/
+│   └── workflows/
+│       └── deploy.yml (GitHub Actions workflow)
 ├── docusaurus.config.js
-├── sidebar.js
+├── sidebars.js
+├── bibliography.md
 └── ...
 ```
 

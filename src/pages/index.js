@@ -11,7 +11,7 @@ export default function Home() {
         <div style={{ marginTop: '20px' }}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
+            to="/intro">
             Get Started with Documentation ⏱️
           </Link>
         </div>
