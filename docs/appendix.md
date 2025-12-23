@@ -1,3 +1,9 @@
+---
+id: appendix
+sidebar_position: 6
+title: "Appendix - Hardware, Tools, and Lab Setup"
+---
+
 # Appendix: Hardware, Tools, and Lab Setup
 
 ## Learning Objectives

@@ -1,3 +1,9 @@
+---
+id: module-1-chapter-5
+sidebar_position: 5
+title: "Chapter 5 - Real-Time Control Concepts (Controller Manager, PID, Sensor Fusion)"
+---
+
 # Chapter 5: Real-Time Control Concepts (Controller Manager, PID, Sensor Fusion)
 
 ## Learning Objectives

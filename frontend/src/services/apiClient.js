@@ -1,7 +1,7 @@
 // API client for the RAG Chatbot
 class ApiClient {
   constructor(baseURL) {
-    this.baseURL = baseURL || process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000/v1';
+    this.baseURL = baseURL || process.env.REACT_APP_API_BASE_URL || 'http://localhost:8006/v1';
   }
 
   // Generic request method

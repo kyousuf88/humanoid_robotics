@@ -1,16 +1,287 @@
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Additional modern color variables */
+  --book-bg-color: #f8fafc;
+  --book-text-color: #1e293b;
+  --book-card-bg: #ffffff;
+  --book-border-color: #e2e8f0;
+  --book-accent-color: #7c3aed;
+  --book-accent-light: #c4b5fd;
+  --book-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --book-gradient-start: #f0f9ff;
+  --book-gradient-end: #e0f2fe;
 }
 
 /* For dark mode */
 [data-theme='dark'] {
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --book-bg-color: #0f172a;
+  --book-text-color: #f1f5f9;
+  --book-card-bg: #1e293b;
+  --book-border-color: #334155;
+  --book-gradient-start: #0c4a6e;
+  --book-gradient-end: #082f49;
+}
+
+/* Modern body styling */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--book-bg-color);
+  color: var(--book-text-color);
+  line-height: 1.6;
+}
+
+/* Enhanced markdown content styling */
+.markdown {
+  font-size: 1.125rem;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--book-text-color);
+}
+
+.markdown h1 {
+  font-size: 2.5rem;
+  border-bottom: 2px solid var(--book-border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.markdown h2 {
+  font-size: 2rem;
+  border-bottom: 1px solid var(--book-border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.markdown h3 {
+  font-size: 1.5rem;
+}
+
+.markdown p {
+  margin-bottom: 1.25rem;
+}
+
+.markdown a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.markdown a:hover {
+  color: var(--ifm-color-primary-darker);
+  text-decoration: underline;
+}
+
+/* Enhanced code blocks */
+.prism-code {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 0.9rem;
+  box-shadow: var(--book-shadow);
+}
+
+/* Enhanced blockquotes */
+.markdown blockquote {
+  border-left: 4px solid var(--ifm-color-primary);
+  background-color: rgba(37, 99, 235, 0.05);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+}
+
+/* Enhanced lists */
+.markdown ul,
+.markdown ol {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.markdown li {
+  margin-bottom: 0.5rem;
+}
+
+.markdown ul li {
+  list-style-type: disc;
+}
+
+/* Card-like styling for main content area */
+.main-wrapper {
+  background: var(--book-card-bg);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 1rem 0;
+  box-shadow: var(--book-shadow);
+  border: 1px solid var(--book-border-color);
+}
+
+/* Modern sidebar styling */
+.menu {
+  border-right: 1px solid var(--book-border-color);
+  padding-right: 1rem;
+}
+
+.menu__list-item-collapsible:hover {
+  background-color: rgba(37, 99, 235, 0.1);
+  border-radius: 0.5rem;
+}
+
+/* Modern navigation styling */
+.navbar {
+  box-shadow: var(--book-shadow);
+  background: var(--book-card-bg);
+  border-bottom: 1px solid var(--book-border-color);
+}
+
+.navbar__item,
+.navbar__link {
+  color: var(--book-text-color);
+  font-weight: 500;
+}
+
+/* Modern footer styling */
+.footer {
+  background: var(--book-card-bg);
+  border-top: 1px solid var(--book-border-color);
+  color: var(--book-text-color);
+  padding: 3rem 0;
+}
+
+/* Enhanced table styling */
+.markdown table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--book-shadow);
+  border: 1px solid var(--book-border-color);
+}
+
+.markdown table th,
+.markdown table td {
+  padding: 0.75rem;
+  border-color: var(--book-border-color);
+}
+
+.markdown table th {
+  background-color: rgba(37, 99, 235, 0.1);
+  font-weight: 600;
+}
+
+/* Code inline styling */
+.markdown code {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: #d97706;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--book-border-color);
+}
+
+/* Image styling */
+.markdown img {
+  border-radius: 0.5rem;
+  box-shadow: var(--book-shadow);
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+}
+
+/* Gradient backgrounds for special sections */
+.hero {
+  background: linear-gradient(135deg, var(--book-gradient-start), var(--book-gradient-end));
+  border-radius: 1rem;
+  margin: 1rem 0;
+  padding: 3rem 1rem;
+}
+
+/* Enhanced button styling */
+.button {
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+/* Scrollbar styling for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--book-border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-primary-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 996px) {
+  .main-wrapper {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  .markdown {
+    font-size: 1rem;
+  }
+
+  .markdown h1 {
+    font-size: 2rem;
+  }
+
+  .markdown h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Special styling for book chapters */
+.book-chapter {
+  background: var(--book-card-bg);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--book-shadow);
+  border: 1px solid var(--book-border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-chapter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for chapter navigation */
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--book-border-color);
 }

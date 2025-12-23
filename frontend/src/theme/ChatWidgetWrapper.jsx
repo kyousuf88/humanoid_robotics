@@ -7,7 +7,7 @@ const ChatWidgetWrapper = () => {
 
   return (
     <ChatWidget
-      apiEndpoint={process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000/v1'}
+      apiEndpoint={process.env.REACT_APP_API_BASE_URL || 'http://localhost:8007/v1'}
       bookUrl={currentUrl}
     />
   );

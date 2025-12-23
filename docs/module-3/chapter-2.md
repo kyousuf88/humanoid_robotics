@@ -1,3 +1,9 @@
+---
+id: module-3-chapter-2
+sidebar_position: 2
+title: "Chapter 2 - Photorealistic Simulation & Synthetic Data Generation"
+---
+
 # Chapter 2: Photorealistic Simulation & Synthetic Data Generation
 
 ## Learning Objectives

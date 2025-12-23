@@ -137,3 +137,4 @@ qdrant_data/
 # OpenAI/Cohere
 *.token
 *.api_key
+nul

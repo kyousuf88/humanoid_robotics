@@ -26,7 +26,7 @@ class ChatRequest(BaseModel):
     )
     context_mode: str = Field(
         "full_book",
-        regex="^(full_book|selected_text)$",
+        pattern="^(full_book|selected_text)$",
         description="The context mode for answering. 'full_book' searches across the entire book, 'selected_text' focuses on user-selected text",
         example="full_book"
     )

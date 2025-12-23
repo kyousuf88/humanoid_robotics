@@ -288,6 +288,14 @@ class ChatService:
             )
             citations.append(citation)
 
+        # If no citations were created, create a default citation indicating no sources found
+        if not citations:
+            citations.append(SourceCitation(
+                url="",
+                title="No relevant sources found in the book",
+                relevance_score=0.0
+            ))
+
         return citations
 
     def _calculate_relevance_score(self, retrieved_chunks: List[Dict[str, Any]]) -> float:

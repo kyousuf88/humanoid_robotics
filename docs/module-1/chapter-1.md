@@ -1,3 +1,9 @@
+---
+id: module-1-chapter-1
+sidebar_position: 1
+title: Chapter 1 - Introduction to Physical AI & Robotics Foundations
+---
+
 # Chapter 1: Introduction to Physical AI & Robotics Foundations
 
 ## Learning Objectives

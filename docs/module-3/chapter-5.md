@@ -1,3 +1,9 @@
+---
+id: module-3-chapter-5
+sidebar_position: 5
+title: "Chapter 5 - Reinforcement Learning & Sim-to-Real Transfer Techniques"
+---
+
 # Chapter 5: Reinforcement Learning & Sim-to-Real Transfer Techniques
 
 ## Learning Objectives

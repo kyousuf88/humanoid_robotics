@@ -1,3 +1,9 @@
+---
+id: module-4-chapter-4
+sidebar_position: 4
+title: "Chapter 4 - Multi-Modal Perception (Vision + Language + Sensor Fusion)"
+---
+
 # Chapter 4: Multi-Modal Perception (Vision + Language + Sensor Fusion)
 
 ## Learning Objectives

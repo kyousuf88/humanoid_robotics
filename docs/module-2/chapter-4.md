@@ -1,3 +1,9 @@
+---
+id: module-2-chapter-4
+sidebar_position: 4
+title: "Chapter 4 - Unity for High-Fidelity Robot Visualization"
+---
+
 # Chapter 4: Unity for High-Fidelity Robot Visualization
 
 ## Learning Objectives

@@ -1,3 +1,9 @@
+---
+id: module-2-chapter-2
+sidebar_position: 2
+title: "Chapter 2 - Gazebo Fundamentals (SDF, URDF, Models, Plugins)"
+---
+
 # Chapter 2: Gazebo Fundamentals (SDF, URDF, Models, Plugins)
 
 ## Learning Objectives

@@ -1,3 +1,9 @@
+---
+id: module-1-chapter-4
+sidebar_position: 4
+title: "Chapter 4 - Robot Description Formats (URDF for humanoid robots)"
+---
+
 # Chapter 4: Robot Description Formats (URDF for humanoid robots)
 
 ## Learning Objectives

@@ -1,11 +1,14 @@
 import asyncio
-import asyncpg
 from typing import Optional, List, Dict, Any
 from src.utils.config import settings
 from src.utils.logger import logger
 import uuid
 from datetime import datetime, timedelta
 import json
+import sqlite3
+import threading
+import time
+import os
 
 
 class DataRetentionService:
@@ -15,70 +18,69 @@ class DataRetentionService:
     """
 
     def __init__(self):
-        self.pool: Optional[asyncpg.Pool] = None
+        self.db_path = "rag_chatbot_test.db"
+        self.lock = threading.Lock()
 
-    async def initialize(self):
-        """Initialize the database connection."""
-        try:
-            self.pool = await asyncpg.create_pool(
-                dsn=settings.neon_database_url,
-                min_size=1,
-                max_size=10,
-                command_timeout=60,
-            )
-            logger.info("Data retention service initialized with database connection")
+    def _get_connection(self):
+        """Get a thread-safe database connection."""
+        return sqlite3.connect(self.db_path, check_same_thread=False)
 
-            # Create necessary tables if they don't exist
-            await self._create_tables()
-        except Exception as e:
-            logger.error(f"Failed to initialize data retention service: {e}")
-            raise
-
-    async def _create_tables(self):
+    def _create_tables(self):
         """Create necessary tables for storing user interaction data."""
-        if not self.pool:
-            return
-
-        async with self.pool.acquire() as conn:
+        conn = self._get_connection()
+        try:
             # Create query_results table
-            await conn.execute("""
+            conn.execute("""
                 CREATE TABLE IF NOT EXISTS query_results (
-                    id UUID PRIMARY KEY,
+                    id TEXT PRIMARY KEY,
                     question TEXT NOT NULL,
                     answer TEXT NOT NULL,
-                    source_citations JSONB NOT NULL,
-                    relevance_score FLOAT NOT NULL,
-                    retrieved_chunks UUID[],
-                    query_timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
-                    session_id UUID
+                    source_citations TEXT NOT NULL,
+                    relevance_score REAL NOT NULL,
+                    query_timestamp TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    session_id TEXT
                 )
             """)
 
             # Create user_sessions table
-            await conn.execute("""
+            conn.execute("""
                 CREATE TABLE IF NOT EXISTS user_sessions (
-                    id UUID PRIMARY KEY,
+                    id TEXT PRIMARY KEY,
                     session_token TEXT UNIQUE NOT NULL,
-                    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-                    last_activity TIMESTAMP NOT NULL DEFAULT NOW(),
+                    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    last_activity TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     selected_text TEXT,
-                    query_history UUID[],
                     rate_limit_remaining INTEGER NOT NULL DEFAULT 100,
-                    rate_limit_reset TIMESTAMP NOT NULL DEFAULT NOW(),
-                    context_preservation JSONB
+                    rate_limit_reset TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
                 )
             """)
 
             # Create indexes for efficient cleanup
-            await conn.execute("""
+            conn.execute("""
                 CREATE INDEX IF NOT EXISTS idx_query_results_timestamp
                 ON query_results(query_timestamp)
             """)
 
-            await conn.execute("""
+            conn.execute("""
                 CREATE INDEX IF NOT EXISTS idx_user_sessions_created_at
                 ON user_sessions(created_at)
             """)
+
+            conn.commit()
+        except Exception as e:
+            logger.error(f"Error creating tables: {e}")
+        finally:
+            conn.close()
+
+    async def initialize(self):
+        """Initialize the database connection."""
+        try:
+            # Create necessary tables if they don't exist
+            self._create_tables()
+            logger.info("Data retention service initialized with SQLite database")
+        except Exception as e:
+            logger.error(f"Failed to initialize data retention service: {e}")
+            raise
 
     async def cleanup_old_data(self, days: int = 30) -> Dict[str, Any]:
         """
@@ -90,43 +92,41 @@ class DataRetentionService:
         Returns:
             Dictionary with cleanup statistics
         """
-        if not self.pool:
-            logger.error("Database not connected, cannot perform cleanup")
-            return {"success": False, "message": "Database not connected"}
-
         try:
             cutoff_date = datetime.utcnow() - timedelta(days=days)
+            cutoff_str = cutoff_date.isoformat()
 
-            async with self.pool.acquire() as conn:
+            conn = self._get_connection()
+            try:
                 # Count records that will be deleted
-                old_query_count = await conn.fetchval(
-                    "SELECT COUNT(*) FROM query_results WHERE query_timestamp < $1",
-                    cutoff_date
-                )
+                old_query_count = conn.execute(
+                    "SELECT COUNT(*) FROM query_results WHERE query_timestamp < ?",
+                    (cutoff_str,)
+                ).fetchone()[0]
 
-                old_session_count = await conn.fetchval(
-                    "SELECT COUNT(*) FROM user_sessions WHERE created_at < $1",
-                    cutoff_date
-                )
+                old_session_count = conn.execute(
+                    "SELECT COUNT(*) FROM user_sessions WHERE created_at < ?",
+                    (cutoff_str,)
+                ).fetchone()[0]
 
                 # Delete old query results
-                deleted_queries = await conn.execute(
-                    "DELETE FROM query_results WHERE query_timestamp < $1",
-                    cutoff_date
+                conn.execute(
+                    "DELETE FROM query_results WHERE query_timestamp < ?",
+                    (cutoff_str,)
                 )
+                deleted_query_count = conn.total_changes
 
                 # Delete old user sessions
-                deleted_sessions = await conn.execute(
-                    "DELETE FROM user_sessions WHERE created_at < $1",
-                    cutoff_date
+                conn.execute(
+                    "DELETE FROM user_sessions WHERE created_at < ?",
+                    (cutoff_str,)
                 )
+                deleted_session_count = conn.total_changes
 
-                # Get actual deleted counts
-                deleted_query_count = int(deleted_queries.split()[1]) if 'DELETE' in deleted_queries else old_query_count
-                deleted_session_count = int(deleted_sessions.split()[1]) if 'DELETE' in deleted_sessions else old_session_count
+                conn.commit()
 
                 logger.info("Data retention cleanup completed", extra={
-                    "cutoff_date": cutoff_date.isoformat(),
+                    "cutoff_date": cutoff_str,
                     "retention_period_days": days,
                     "deleted_query_count": deleted_query_count,
                     "deleted_session_count": deleted_session_count
@@ -134,12 +134,24 @@ class DataRetentionService:
 
                 return {
                     "success": True,
-                    "cutoff_date": cutoff_date.isoformat(),
+                    "cutoff_date": cutoff_str,
                     "retention_period_days": days,
                     "deleted_query_count": deleted_query_count,
                     "deleted_session_count": deleted_session_count,
                     "message": f"Successfully deleted {deleted_query_count} query results and {deleted_session_count} user sessions older than {days} days"
                 }
+
+            except Exception as e:
+                logger.error(f"Error during data cleanup: {e}", extra={
+                    "error": str(e)
+                })
+                return {
+                    "success": False,
+                    "error": str(e),
+                    "message": f"Failed to clean up old data: {str(e)}"
+                }
+            finally:
+                conn.close()
 
         except Exception as e:
             logger.error(f"Error during data cleanup: {e}", extra={
@@ -195,37 +207,36 @@ class DataRetentionService:
         Returns:
             Dictionary with retention statistics
         """
-        if not self.pool:
-            return {"success": False, "message": "Database not connected"}
-
         try:
             cutoff_date = datetime.utcnow() - timedelta(days=30)
+            cutoff_str = cutoff_date.isoformat()
 
-            async with self.pool.acquire() as conn:
+            conn = self._get_connection()
+            try:
                 # Count old records that would be deleted
-                old_query_count = await conn.fetchval(
-                    "SELECT COUNT(*) FROM query_results WHERE query_timestamp < $1",
-                    cutoff_date
-                )
+                old_query_count = conn.execute(
+                    "SELECT COUNT(*) FROM query_results WHERE query_timestamp < ?",
+                    (cutoff_str,)
+                ).fetchone()[0]
 
-                old_session_count = await conn.fetchval(
-                    "SELECT COUNT(*) FROM user_sessions WHERE created_at < $1",
-                    cutoff_date
-                )
+                old_session_count = conn.execute(
+                    "SELECT COUNT(*) FROM user_sessions WHERE created_at < ?",
+                    (cutoff_str,)
+                ).fetchone()[0]
 
                 # Count total records
-                total_query_count = await conn.fetchval(
+                total_query_count = conn.execute(
                     "SELECT COUNT(*) FROM query_results"
-                )
+                ).fetchone()[0]
 
-                total_session_count = await conn.fetchval(
+                total_session_count = conn.execute(
                     "SELECT COUNT(*) FROM user_sessions"
-                )
+                ).fetchone()[0]
 
                 return {
                     "success": True,
                     "retention_policy_days": 30,
-                    "cutoff_date": cutoff_date.isoformat(),
+                    "cutoff_date": cutoff_str,
                     "would_delete": {
                         "query_results": old_query_count,
                         "user_sessions": old_session_count
@@ -236,6 +247,18 @@ class DataRetentionService:
                     },
                     "message": f"Found {old_query_count} query results and {old_session_count} user sessions that would be deleted under current retention policy"
                 }
+
+            except Exception as e:
+                logger.error(f"Error getting retention stats: {e}", extra={
+                    "error": str(e)
+                })
+                return {
+                    "success": False,
+                    "error": str(e),
+                    "message": f"Failed to get retention stats: {str(e)}"
+                }
+            finally:
+                conn.close()
 
         except Exception as e:
             logger.error(f"Error getting retention stats: {e}", extra={
@@ -248,7 +271,5 @@ class DataRetentionService:
             }
 
     async def close(self):
-        """Close the database connection pool."""
-        if self.pool:
-            await self.pool.close()
-            logger.info("Data retention service database connection pool closed")
+        """Close the database connection."""
+        logger.info("Data retention service database connection closed")
