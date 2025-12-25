@@ -218,8 +218,8 @@
 module.exports = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'AI Systems in the Physical World',
-  url: 'https://kyousuf88.github.io',
-  baseUrl: '/humanoid_robotics/',
+  url: 'https://github.com/kyousuf88/humanoid_robotics',
+  baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'kyousuf88',
   projectName: 'humanoid_robotics',
