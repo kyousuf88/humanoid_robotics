@@ -218,8 +218,8 @@
 module.exports = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'AI Systems in the Physical World',
-  url: 'https://humanoid-robotics-book.vercel.app', // Replace with your production domain
-  baseUrl: '/',
+  url: 'https://kyousuf88.github.io', // Replace with your production domain
+  baseUrl: '/humanoid_robotics/',
   favicon: 'img/favicon.ico',
   organizationName: 'kyousuf88',
   projectName: 'humanoid_robotics',
