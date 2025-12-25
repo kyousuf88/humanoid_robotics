@@ -1,0 +1,206 @@
+# API Contract: RAG Chatbot Integration
+
+## Overview
+This document defines the API contracts for the RAG Chatbot Integration feature. The API provides endpoints for embedding, querying, and chat functionality to support the book question-answering system.
+
+## Base URL
+`https://api.book-chatbot.com/v1` (production)
+`http://localhost:8000` (development)
+
+## Authentication
+Most endpoints are public (no authentication required), but rate-limited per IP/session.
+
+## Common Response Structure
+
+```json
+{
+  "success": true,
+  "data": {},
+  "message": "Optional message",
+  "timestamp": "2025-12-10T10:00:00Z",
+  "request_id": "unique-request-id"
+}
+```
+
+## Error Response Structure
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable error message",
+    "details": {}
+  },
+  "timestamp": "2025-12-10T10:00:00Z",
+  "request_id": "unique-request-id"
+}
+```
+
+## Endpoints
+
+### 1. Chat Endpoint
+
+#### POST /chat
+Process a user's question and return an AI-generated answer with source citations.
+
+**Request Body:**
+```json
+{
+  "question": "What is the main concept discussed in chapter 3?",
+  "context_mode": "full_book|selected_text",
+  "selected_text": "Optional text selected by user (max 1000 words)",
+  "session_id": "Optional session identifier"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "answer": "The main concept discussed in chapter 3 is...",
+    "source_citations": [
+      {
+        "url": "https://book.example.com/chapter3",
+        "title": "Chapter 3: Key Concepts",
+        "relevance_score": 0.89
+      }
+    ],
+    "relevance_score": 0.85,
+    "session_id": "generated-or-provided-session-id"
+  }
+}
+```
+
+**Validation:**
+- `question` is required and must not be empty
+- `context_mode` must be either "full_book" or "selected_text"
+- If `context_mode` is "selected_text", `selected_text` is required
+- If `selected_text` is provided, it must be <= 1000 words
+
+### 2. Query Endpoint
+
+#### POST /query
+Query the vector database directly and return relevant chunks without AI processing.
+
+**Request Body:**
+```json
+{
+  "query": "Information about machine learning algorithms",
+  "top_k": 5,
+  "min_relevance_score": 0.75
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "query": "Information about machine learning algorithms",
+    "results": [
+      {
+        "text": "The text content of the retrieved chunk...",
+        "source_url": "https://book.example.com/chapter4",
+        "chapter": "Chapter 4",
+        "position": 2,
+        "relevance_score": 0.89
+      }
+    ]
+  }
+}
+```
+
+### 3. Embed Endpoint
+
+#### POST /embed
+Generate embeddings for text content and store in vector database.
+
+**Request Body:**
+```json
+{
+  "text_chunks": [
+    {
+      "text": "The first chunk of text to embed...",
+      "source_url": "https://book.example.com/chapter1",
+      "chapter": "Chapter 1",
+      "position": 1
+    }
+  ]
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "processed_count": 1,
+    "stored_chunk_ids": ["uuid-of-stored-chunk"],
+    "status": "completed"
+  }
+}
+```
+
+### 4. Health Check Endpoint
+
+#### GET /health
+Check the health status of the service and its dependencies.
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "status": "healthy",
+    "timestamp": "2025-12-10T10:00:00Z",
+    "dependencies": {
+      "qdrant": "connected",
+      "cohere": "connected",
+      "openai": "connected",
+      "postgres": "connected"
+    }
+  }
+}
+```
+
+### 5. Session Management
+
+#### POST /session/init
+Initialize a new user session with rate limiting.
+
+**Request Body:**
+```json
+{
+  "session_context": "Optional context for the session"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "session_id": "new-session-uuid",
+    "rate_limit_remaining": 100,
+    "rate_limit_reset": "2025-12-10T11:00:00Z"
+  }
+}
+```
+
+## Rate Limiting
+All endpoints implement rate limiting:
+- 100 requests per hour per IP/session
+- Response headers include:
+  - `X-RateLimit-Limit`: Total requests allowed per window
+  - `X-RateLimit-Remaining`: Remaining requests in current window
+  - `X-RateLimit-Reset`: Time when limit resets
+
+## Error Codes
+- `INVALID_INPUT`: Request validation failed
+- `VECTOR_DB_UNAVAILABLE`: Qdrant database unavailable
+- `EMBEDDING_FAILED`: Cohere embedding generation failed
+- `CHAT_GENERATION_FAILED`: OpenAI chat completion failed
+- `RATE_LIMIT_EXCEEDED`: Rate limit exceeded
+- `RESOURCE_NOT_FOUND`: Requested resource not found

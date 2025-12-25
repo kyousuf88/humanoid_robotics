@@ -1,3 +1,9 @@
+---
+id: module-4-chapter-1
+sidebar_position: 1
+title: "Chapter 1 - Introduction to VLA Robotics"
+---
+
 # Chapter 1: Introduction to VLA Robotics
 
 ## Learning Objectives

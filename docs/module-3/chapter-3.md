@@ -1,3 +1,9 @@
+---
+id: module-3-chapter-3
+sidebar_position: 3
+title: "Chapter 3 - Isaac ROS Perception Pipelines (VSLAM, Depth, Object Detection)"
+---
+
 # Chapter 3: Isaac ROS Perception Pipelines (VSLAM, Depth, Object Detection)
 
 ## Learning Objectives

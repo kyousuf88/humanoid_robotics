@@ -1,3 +1,9 @@
+---
+id: module-2-chapter-3
+sidebar_position: 3
+title: "Chapter 3 - Sensor Simulation (LiDAR, IMUs, Depth Cameras, noise models)"
+---
+
 # Chapter 3: Sensor Simulation (LiDAR, IMUs, Depth Cameras, noise models)
 
 ## Learning Objectives

@@ -1,3 +1,9 @@
+---
+id: module-2-chapter-5
+sidebar_position: 5
+title: "Chapter 5 - Environment & Scenario Building (multi-room navigation, interactions)"
+---
+
 # Chapter 5: Environment & Scenario Building (multi-room navigation, interactions)
 
 ## Learning Objectives

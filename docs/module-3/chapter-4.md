@@ -1,3 +1,9 @@
+---
+id: module-3-chapter-4
+sidebar_position: 4
+title: "Chapter 4 - Navigation & Path Planning (Nav2 for biped locomotion)"
+---
+
 # Chapter 4: Navigation & Path Planning (Nav2 for biped locomotion)
 
 ## Learning Objectives

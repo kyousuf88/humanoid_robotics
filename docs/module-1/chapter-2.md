@@ -1,3 +1,9 @@
+---
+id: module-1-chapter-2
+sidebar_position: 2
+title: "Chapter 2 - ROS 2 Architecture (Nodes, Topics, Services, Actions, DDS, QoS)"
+---
+
 # Chapter 2: ROS 2 Architecture (Nodes, Topics, Services, Actions, DDS, QoS)
 
 ## Learning Objectives

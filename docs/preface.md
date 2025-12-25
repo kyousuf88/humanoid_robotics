@@ -1,3 +1,9 @@
+---
+id: preface
+sidebar_position: 1
+title: Preface
+---
+
 # Preface
 
 ## Learning Objectives

@@ -1,3 +1,9 @@
+---
+id: module-3-chapter-1
+sidebar_position: 1
+title: "Chapter 1 - NVIDIA Isaac Ecosystem Overview (Sim, ROS, Omniverse)"
+---
+
 # Chapter 1: NVIDIA Isaac Ecosystem Overview (Sim, ROS, Omniverse)
 
 ## Learning Objectives

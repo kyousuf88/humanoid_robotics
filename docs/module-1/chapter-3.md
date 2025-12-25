@@ -1,3 +1,9 @@
+---
+id: module-1-chapter-3
+sidebar_position: 3
+title: "Chapter 3 - Building ROS 2 Packages with rclpy (workspaces, nodes, launch files)"
+---
+
 # Chapter 3: Building ROS 2 Packages with rclpy (workspaces, nodes, launch files)
 
 ## Learning Objectives

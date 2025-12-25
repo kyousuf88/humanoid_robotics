@@ -1,3 +1,9 @@
+---
+id: module-4-chapter-2
+sidebar_position: 2
+title: "Chapter 2 - Voice-to-Action Pipeline (Whisper → Intent → ROS 2 Actions)"
+---
+
 # Chapter 2: Voice-to-Action Pipeline (Whisper → Intent → ROS 2 Actions)
 
 ## Learning Objectives

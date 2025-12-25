@@ -1,3 +1,9 @@
+---
+id: module-4-chapter-5
+sidebar_position: 5
+title: "Chapter 5 - Capstone Project: The Autonomous Humanoid"
+---
+
 # Chapter 5: Capstone Project: The Autonomous Humanoid
 
 ## Learning Objectives

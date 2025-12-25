@@ -1,26 +1,140 @@
 # Gitignore for Node.js
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 dist/
 build/
-*.log
-.env*
+coverage/
+.nyc_output/
+.next/
+.nuxt/
+out/
+.npm/
 
 # Gitignore for Python
 __pycache__/
-*.pyc
-.venv/
-venv/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
 dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
 *.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+noxfile.json
+coverage.xml
+*.coverage
+*.log
+.pyup.yml
+.bandit
+.isort-cache
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.env/
+.ENV/
+.venv/
+.env.bak/
 
 # Gitignore for Docusaurus
 .docusaurus/
 .docusaurus_build/
 
-# Universal ignores
+# Environment variables
+.env*
+!.env.example
+
+# OS
 .DS_Store
 Thumbs.db
-*.tmp
-*.swp
+ehthumbs.db
+Icon?
+.DS_Store?
+
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.coverage.*
+.cov/
+.coverage-*
+
+# Backend specific
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/venv/
+backend/env/
+backend/.env
+
+# Frontend specific
+frontend/node_modules/
+frontend/build/
+frontend/.env
+frontend/coverage/
+frontend/.nyc_output/
+frontend/.next/
+frontend/.nuxt/
+frontend/out/
+frontend/.npm/
+
+# Docker
+.dockerignore
+*.dockerfile
+Dockerfile*
+
+# Database
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Secrets
+secrets/
+*.key
+*.pem
+*.crt
+*.cert
+
+# Qdrant
+.qdrant/
+qdrant_data/
+
+# OpenAI/Cohere
+*.token
+*.api_key
+nul

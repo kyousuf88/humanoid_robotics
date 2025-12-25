@@ -1,3 +1,9 @@
+---
+id: module-2-chapter-1
+sidebar_position: 1
+title: "Chapter 1 - Digital Twins in Physical AI & the Sim-to-Real Gap"
+---
+
 # Chapter 1: Digital Twins in Physical AI & the Sim-to-Real Gap
 
 ## Learning Objectives

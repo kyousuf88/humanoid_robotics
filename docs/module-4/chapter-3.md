@@ -1,3 +1,9 @@
+---
+id: module-4-chapter-3
+sidebar_position: 3
+title: "Chapter 3 - Cognitive Planning Using LLMs"
+---
+
 # Chapter 3: Cognitive Planning Using LLMs
 
 ## Learning Objectives
