@@ -9,15 +9,15 @@ const darkCodeTheme = themes.dracula;
   const config = {
     title: 'Physical AI & Humanoid Robotics',
     tagline: 'An AI-Native Guide to Building Humanoid Robots',
-    url: 'https://your-actual-domain.com', // Replace with your site's URL
+    url: 'https://your-docusaurus-site.example.com', // Replace with your site's URL
     baseUrl: '/',
     onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',
 
-    organizationName: 'your-github-org', // Replace with your GitHub org/user name
+    organizationName: 'your-github-username', // Replace with your GitHub org/user name
     projectName: 'humanoid_robotics', // Replace with your repo name
-    deploymentBranch: 'gh-pages',
+    //deploymentBranch: 'gh-pages',
 
     i18n: {
       defaultLocale: 'en',
@@ -32,12 +32,12 @@ const darkCodeTheme = themes.dracula;
         docs: {
           sidebarPath: require.resolve('./sidebar.js'),
           editUrl:
-            'https://github.com/your-github-org/humanoid_robotics/tree/main/',
+            'https://github.com/your-github-username/humanoid_robotics/tree/main/',
         },
         blog: {
           showReadingTime: true,
           editUrl:
-            'https://github.com/your-github-org/humanoid_robotics/tree/main/',
+            'https://github.com/your-github-username/humanoid_robotics/tree/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -64,7 +64,7 @@ const darkCodeTheme = themes.dracula;
             label: 'Book',
           },
           {
-            href: 'https://github.com/your-github-org/humanoid_robotics',
+            href: 'https://github.com/your-github-username/humanoid_robotics',
             label: 'GitHub',
             position: 'right',
           },
@@ -93,7 +93,7 @@ const darkCodeTheme = themes.dracula;
           {
             title: 'More',
             items: [
-              { label: 'GitHub', href: 'https://github.com/your-github-org/humanoid_robotics' },
+              { label: 'GitHub', href: 'https://github.com/your-github-username/humanoid_robotics' },
             ],
           },
         ],
