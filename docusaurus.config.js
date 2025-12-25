@@ -9,8 +9,8 @@ const darkCodeTheme = themes.dracula;
   const config = {
     title: 'Physical AI & Humanoid Robotics',
     tagline: 'An AI-Native Guide to Building Humanoid Robots',
-    url: 'https://kyousuf88.github.io', // Replace with your site's URL
-    baseUrl: '/humanoid_robotics/',
+    url: 'https://humanoid-robotics.vercel.app', // Replace with your site's URL
+    baseUrl: '/',
     onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',
