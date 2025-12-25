@@ -218,17 +218,17 @@
 module.exports = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'AI Systems in the Physical World',
-  url: 'https://github.com/kyousuf88/humanoid_robotics',
+  url: 'https://humanoid-robotics-book.vercel.app', // Replace with your production domain
   baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'kyousuf88',
   projectName: 'humanoid_robotics',
-  trailingSlash: false,
-  deploymentBranch: 'gh-pages',
+  trailingSlash: false, // Set to false for Vercel compatibility
+  // deploymentBranch only needed for GitHub Pages deployment
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn', // Note: This will be moved in Docusaurus v4
   markdown: {
-    hooks: {
-      onBrokenMarkdownLinks: 'warn',
-    },
+    mermaid: true,
   },
   presets: [
     [
