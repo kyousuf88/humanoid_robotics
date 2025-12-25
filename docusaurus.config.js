@@ -9,15 +9,15 @@ const darkCodeTheme = themes.dracula;
   const config = {
     title: 'Physical AI & Humanoid Robotics',
     tagline: 'An AI-Native Guide to Building Humanoid Robots',
-    url: 'https://your-docusaurus-site.example.com', // Replace with your site's URL
-    baseUrl: '/',
+    url: 'https://your-github-username.github.io', // Replace with your site's URL
+    baseUrl: '/humanoid_robotics/',
     onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',
 
-    organizationName: 'your-github-username', // Replace with your GitHub org/user name
+    organizationName: 'kyousuf88', // Replace with your GitHub org/user name
     projectName: 'humanoid_robotics', // Replace with your repo name
-    //deploymentBranch: 'gh-pages',
+    deploymentBranch: 'gh-pages',
 
     i18n: {
       defaultLocale: 'en',
