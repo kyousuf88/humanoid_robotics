@@ -9,7 +9,7 @@ const darkCodeTheme = themes.dracula;
   const config = {
     title: 'Physical AI & Humanoid Robotics',
     tagline: 'An AI-Native Guide to Building Humanoid Robots',
-    url: 'https://your-github-username.github.io', // Replace with your site's URL
+    url: 'https://kyousuf88.github.io', // Replace with your site's URL
     baseUrl: '/humanoid_robotics/',
     onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: 'warn',
@@ -17,7 +17,7 @@ const darkCodeTheme = themes.dracula;
 
     organizationName: 'kyousuf88', // Replace with your GitHub org/user name
     projectName: 'humanoid_robotics', // Replace with your repo name
-    deploymentBranch: 'gh-pages',
+    deploymentBranch: 'main',
 
     i18n: {
       defaultLocale: 'en',
