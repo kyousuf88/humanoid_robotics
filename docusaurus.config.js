@@ -15,9 +15,9 @@ const darkCodeTheme = themes.dracula;
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',
 
-    organizationName: 'kyousuf88', // Replace with your GitHub org/user name
-    projectName: 'humanoid_robotics', // Replace with your repo name
-    deploymentBranch: 'main',
+    //organizationName: 'kyousuf88', // Replace with your GitHub org/user name
+    //projectName: 'humanoid_robotics', // Replace with your repo name
+    //deploymentBranch: 'main',
 
     i18n: {
       defaultLocale: 'en',
