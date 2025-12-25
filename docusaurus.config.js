@@ -9,7 +9,7 @@ const darkCodeTheme = themes.dracula;
   const config = {
     title: 'Physical AI & Humanoid Robotics',
     tagline: 'An AI-Native Guide to Building Humanoid Robots',
-    url: 'https://humanoid-robotics.vercel.app', // Replace with your site's URL
+    url: 'https://your-docusaurus-site.example.com', // Replace with your site's URL
     baseUrl: '/',
     onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: 'warn',
