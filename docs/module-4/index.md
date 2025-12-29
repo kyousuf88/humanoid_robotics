@@ -83,7 +83,7 @@ If your hardware doesn't meet the minimum requirements, consider:
 
 ## Quick Links
 
-- [Chapter 1: Introduction to VLA Robotics](/docs/module-4/chapter-1)
+- [Chapter 1: Introduction to VLA Robotics](/docs/module-4/module-4-chapter-1)
 - [Troubleshooting Guide](/docs/module-4/troubleshooting)
 - [Hardware Requirements (All Modules)](/docs/appendix/hardware-requirements)
 - [Tools Setup Guide](/docs/appendix/tools-setup)

@@ -60,7 +60,7 @@ nvidia-smi
 
 ## Quick Links
 
-- [Chapter 1: Digital Twins & Sim-to-Real Gap](/docs/module-2/chapter-1)
+- [Chapter 1: Digital Twins & Sim-to-Real Gap](/docs/module-2/module-2-chapter-1)
 - [Troubleshooting Guide](/docs/module-2/troubleshooting)
 - [Hardware Requirements (All Modules)](/docs/appendix/hardware-requirements)
 - [Tools Setup Guide](/docs/appendix/tools-setup)

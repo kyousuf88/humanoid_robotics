@@ -1,30 +1,34 @@
 // @ts-check
-// `@type` JSDoc annotations allow IDEs and type checkers to autocomplete and validate types
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Physical AI & Humanoid Robotics',
-  tagline:
-    'A Comprehensive Guide to ROS 2, Gazebo, Unity, NVIDIA Isaac, and VLA Technologies',
+  tagline: 'A Comprehensive Guide to ROS 2, Gazebo, Unity, NVIDIA Isaac, and VLA Technologies',
   favicon: 'img/favicon.ico',
 
-  // Production URL
-  url: 'https://your-docusaurus-site.example.com',
+  // Set the production URL to your Vercel domain
+  // IMPORTANT: Update this to your actual Vercel URL
+  url: 'https://humanoid-robotics.vercel.app',
+
+  // For Vercel deployment at root, baseUrl must be '/'
   baseUrl: '/',
 
-  // GitHub Pages deployment
-  organizationName: 'your-github-username',
-  projectName: 'Humanoid-Robotics',
+  // Disable trailing slash to avoid routing issues
+  trailingSlash: false,
 
-  onBrokenLinks: 'ignore',
-  onBrokenMarkdownLinks: 'ignore',
+  // GitHub Pages config (not used for Vercel, but keeping for reference)
+  organizationName: 'kyousuf88',
+  projectName: 'humanoid_robotics',
+
+  // Ignore broken links during build (can change to 'throw' once all links are fixed)
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
+  onBrokenAnchors: 'warn',
 
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
-
-  plugins: [],
 
   presets: [
     [
@@ -32,13 +36,13 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/your-github-username/humanoid-robotics',
+          sidebarPath: './sidebars.js',
+          // Update to your actual GitHub repo
+          editUrl: 'https://github.com/kyousuf88/humanoid_robotics/tree/main/',
         },
         blog: false,
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: './src/css/custom.css',
         },
       }),
     ],
@@ -47,12 +51,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: 'img/physical-ai-humanoid-robotics.svg',
+      // Social card image
+      image: 'img/docusaurus-social-card.jpg',
 
       navbar: {
         title: 'Physical AI Book',
         logo: {
-          alt: 'Physical AI & Humanoid Robotics Logo',
+          alt: 'Physical AI Logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -63,7 +68,7 @@ const config = {
             label: 'Modules',
           },
           {
-            href: 'https://github.com/your-github-username/humanoid-robotics',
+            href: 'https://github.com/kyousuf88/humanoid_robotics',
             label: 'GitHub',
             position: 'right',
           },
@@ -74,36 +79,40 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Modules',
+            title: 'Book Content',
             items: [
               {
-                label: 'Module 1: ROS 2',
+                label: 'Introduction',
                 to: '/docs/intro',
               },
               {
-                label: 'Module 2: Digital Twins (Coming Soon)',
-                href: '#',
+                label: 'Module 1: ROS 2',
+                to: '/docs/module-1',
               },
               {
-                label: 'Module 3: AI Brain (Coming Soon)',
-                href: '#',
+                label: 'Module 2: Digital Twins',
+                to: '/docs/module-2',
               },
               {
-                label: 'Module 4: VLA (Coming Soon)',
-                href: '#',
+                label: 'Module 3: AI Brain',
+                to: '/docs/module-3',
+              },
+              {
+                label: 'Module 4: VLA',
+                to: '/docs/module-4',
               },
             ],
           },
           {
-            title: 'Community',
+            title: 'Resources',
             items: [
               {
-                label: 'Discord',
-                href: 'https://discord.gg/',
+                label: 'Hardware Requirements',
+                to: '/docs/appendix/hardware-requirements',
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/',
+                label: 'Tools Setup',
+                to: '/docs/appendix/tools-setup',
               },
             ],
           },
@@ -112,8 +121,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href:
-                  'https://github.com/your-github-username/humanoid-robotics',
+                href: 'https://github.com/kyousuf88/humanoid_robotics',
               },
             ],
           },
@@ -123,7 +131,7 @@ const config = {
 
       prism: {
         theme: require('prism-react-renderer').themes.github,
-        darkTheme: require('prism-react-renderer').themes.nightOwl,
+        darkTheme: require('prism-react-renderer').themes.dracula,
       },
     }),
 };

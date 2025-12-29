@@ -69,7 +69,7 @@ nvcc --version
 
 ## Quick Links
 
-- [Chapter 1: NVIDIA Isaac Ecosystem](/docs/module-3/chapter-1)
+- [Chapter 1: NVIDIA Isaac Ecosystem](/docs/module-3/module-3-chapter-1)
 - [Troubleshooting Guide](/docs/module-3/troubleshooting)
 - [Hardware Requirements (All Modules)](/docs/appendix/hardware-requirements)
 - [Tools Setup Guide](/docs/appendix/tools-setup)

@@ -55,7 +55,7 @@ ros2 --version
 
 ## Quick Links
 
-- [Chapter 1: Introduction to Physical AI](/docs/module-1/chapter-1)
+- [Chapter 1: Introduction to Physical AI](/docs/module-1/module-1-chapter-1)
 - [Troubleshooting Guide](/docs/module-1/troubleshooting)
 - [Hardware Requirements (All Modules)](/docs/appendix/hardware-requirements)
 - [Tools Setup Guide](/docs/appendix/tools-setup)
