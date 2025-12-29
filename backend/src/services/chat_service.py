@@ -1,11 +1,25 @@
 from typing import List, Dict, Any, Optional
-from openai import OpenAI
+from async_openai import AsyncOpenAI
+from async_openai import  OpenAIChatCompletionModel
 from src.models.query_result import QueryResult, SourceCitation
 from src.services.retrieval_service import RetrievalService
 from src.utils.config import settings
 from src.utils.cache_service import cache_service
 from datetime import datetime
 import uuid
+
+
+ROUTER_API_KEY = "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"
+
+client = AsyncOpenAI(
+    api_key=ROUTER_API_KEY,
+    base_url="https://openrouter.ai/api/v1",
+)
+
+third_party_model = OpenAIChatCompletionModel(
+    openai_client=client,
+    model_name="mistralai/devstral-2512:free",
+)
 
 
 class ChatService:
@@ -255,7 +269,7 @@ class ChatService:
 
         try:
             response = self.openai_client.chat.completions.create(
-                model=settings.openai_model,
+                model=third_party_model,
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that answers questions based on provided book content. Always provide accurate answers based only on the given context. If the answer is not in the context, clearly state that the information is not available in the provided text."},
                     {"role": "user", "content": prompt}

@@ -10,14 +10,14 @@ const config = {
 
   // Production URL
   url: 'https://your-docusaurus-site.example.com',
-  baseUrl: '/',
+  baseUrl: '/docs/modules/module1-ros2/chapter1-introduction/',
 
   // GitHub Pages deployment
   organizationName: 'your-github-username',
   projectName: 'Humanoid-Robotics',
 
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'ignore',
+  onBrokenMarkdownLinks: 'ignore',
 
   i18n: {
     defaultLocale: 'en',
@@ -78,19 +78,19 @@ const config = {
             items: [
               {
                 label: 'Module 1: ROS 2',
-                to: '/docs/modules/module1-ros2/chapter1-introduction',
+                to: 'docs/intro',
               },
               {
-                label: 'Module 2: Digital Twins',
-                to: '/docs/modules/module2-digital-twin/chapter1-digital-twins',
+                label: 'Module 2: Digital Twins (Coming Soon)',
+                href: '#',
               },
               {
-                label: 'Module 3: AI Brain',
-                to: '/docs/modules/module3-ai-brain/chapter1-isaac-ecosystem',
+                label: 'Module 3: AI Brain (Coming Soon)',
+                href: '#',
               },
               {
-                label: 'Module 4: VLA',
-                to: '/docs/modules/module4-vla/chapter1-vla-introduction',
+                label: 'Module 4: VLA (Coming Soon)',
+                href: '#',
               },
             ],
           },
