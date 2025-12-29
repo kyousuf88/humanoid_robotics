@@ -1,316 +1,550 @@
-# Implementation Plan: AI/Spec-Driven Book Creation
+# Implementation Plan: Physical AI & Humanoid Robotics Book
 
-## Project: AI/Spec-Driven Book Creation Using Docusaurus, Spec-Kit Plus, and Claude Code
-## Reference: Constitution + High-Level Book Layout (Iteration 1)
+**Branch**: `001-physical-ai-book` | **Date**: 2025-12-30 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/specs/001-physical-ai-book/spec.md`
 
----
+## Summary
 
-## Objective
+Create a comprehensive technical book on Physical AI and Humanoid Robotics covering ROS 2, Gazebo, Unity, NVIDIA Isaac, and VLA technologies. The book will be authored using Spec-Kit Plus and Claude Code, published via Docusaurus, and deployed to GitHub Pages. Target audience: robotics students and engineers seeking hands-on understanding of modern humanoid robotics pipelines.
 
-This technical plan guides the architecture, content creation workflow, research methodology, quality checks, and documentation decisions for writing and publishing the "Physical AI & Humanoid Robotics" book. This plan sets the foundation before detailed chapter specs in Iteration 2.
+## Technical Context
 
----
+**Language/Version**: Markdown (Docusaurus 3.x compatible), Python 3.10+ (for code examples)
+**Primary Dependencies**: Docusaurus 3.x, React 18, MDX 3.x, Prism (syntax highlighting)
+**Storage**: Static files (Markdown, images, code snippets) in Git repository
+**Testing**: Docusaurus build validation, link checking, code example validation
+**Target Platform**: Web (GitHub Pages), PDF export capability
+**Project Type**: Static documentation site (Docusaurus)
+**Performance Goals**: < 3s page load, < 50MB total site size
+**Constraints**: 30,000–50,000 words, 10–20 chapters, 100% code example validity
+**Scale/Scope**: 4 modules, 20+ chapters, ~40 code examples, ~60 diagrams
 
-## 1. Architecture Sketch
+### Pinned Tool Versions (FR-023)
 
-### Book Structure
-The book will follow a modular structure:
-- **Modules**: High-level thematic sections (e.g., "The Robotic Nervous System").
-- **Chapters**: Subdivisions within modules, focusing on specific concepts or technologies.
-- **Content Blocks**: Individual sections within chapters (e.g., learning objectives, key concepts, code examples, diagrams, citations).
+| Tool | Version | Notes |
+|------|---------|-------|
+| ROS 2 | Humble Hawksbill (LTS) | Ubuntu 22.04 recommended |
+| Gazebo | Harmonic | Compatible with ROS 2 Humble |
+| Unity | 2022 LTS | Unity Robotics Hub required |
+| NVIDIA Isaac Sim | 2023.1.x | Requires RTX GPU |
+| Python | 3.10+ | For rclpy examples |
+| Docusaurus | 3.x | Static site generation |
 
-### Docusaurus Folder Hierarchy
-The Docusaurus project will be structured as follows:
+## Constitution Check
+
+*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+
+| Principle | Status | Evidence |
+|-----------|--------|----------|
+| **Accuracy** | ✅ PASS | Primary sources (ROS 2 docs, NVIDIA docs, academic papers) mandated |
+| **Clarity** | ✅ PASS | Flesch-Kincaid Grade 9–12 target defined (SC-006) |
+| **Reproducibility** | ✅ PASS | All code examples must be tested (SC-003), versions pinned (FR-023) |
+| **Rigor** | ✅ PASS | 40% peer-reviewed sources required (SC-005) |
+| **Consistency** | ✅ PASS | Style guide + chapter templates enforced |
+| **Documentation Quality** | ✅ PASS | Docusaurus formatting, troubleshooting sections (FR-022) |
+
+### Key Standards Compliance
+
+| Standard | Requirement | Implementation |
+|----------|-------------|----------------|
+| Source traceability | All claims traceable | APA citations per chapter |
+| Citation format | APA style | End-of-chapter references |
+| Plagiarism | 0% tolerance | Pre-publish plagiarism scan |
+| Code validity | 100% tested | CI validation pipeline |
+| Deployment | Clean build | GitHub Actions + Pages |
+
+**GATE STATUS**: ✅ PASS — No violations. Proceed to Phase 0.
+
+## Project Structure
+
+### Documentation (this feature)
+
+```text
+specs/001-physical-ai-book/
+├── plan.md              # This file
+├── research.md          # Phase 0 output
+├── data-model.md        # Phase 1 output (content model)
+├── quickstart.md        # Phase 1 output (author workflow)
+├── contracts/           # Phase 1 output (chapter templates)
+│   ├── chapter-template.md
+│   ├── module-template.md
+│   └── code-example-template.md
+└── tasks.md             # Phase 2 output (/sp.tasks command)
 ```
-├── docs/
-│   ├── preface.md
-│   ├── appendix.md
-│   ├── module-1/
-│   │   ├── chapter-1.md
-│   │   ├── chapter-2.md
-│   │   ├── chapter-3.md
-│   │   ├── chapter-4.md
-│   │   ├── chapter-5.md
-│   │   └── ...
-│   ├── module-2/
-│   │   ├── chapter-1.md
-│   │   ├── chapter-2.md
-│   │   ├── chapter-3.md
-│   │   ├── chapter-4.md
-│   │   ├── chapter-5.md
-│   │   └── ...
-│   ├── module-3/
-│   │   ├── chapter-1.md
-│   │   ├── chapter-2.md
-│   │   ├── chapter-3.md
-│   │   ├── chapter-4.md
-│   │   ├── chapter-5.md
-│   │   └── ...
-│   ├── module-4/
-│   │   ├── chapter-1.md
-│   │   ├── chapter-2.md
-│   │   ├── chapter-3.md
-│   │   ├── chapter-4.md
-│   │   ├── chapter-5.md
-│   │   └── ...
-│   └── ...
-├── src/
-│   └── components/ (for custom React components, e.g., interactive diagrams)
+
+### Source Code (Docusaurus Site)
+
+```text
+humanoid_robotics/
+├── docs/                          # Main content directory
+│   ├── intro.md                   # Book introduction
+│   ├── preface.md                 # Preface
+│   ├── modules/
+│   │   ├── module1-ros2/          # Module 1: ROS 2
+│   │   │   ├── chapter1-introduction.md
+│   │   │   ├── chapter2-architecture.md
+│   │   │   ├── chapter3-packages.md
+│   │   │   ├── chapter4-urdf.md
+│   │   │   ├── chapter5-control.md
+│   │   │   └── troubleshooting.md
+│   │   ├── module2-digital-twin/  # Module 2: Digital Twin
+│   │   │   ├── chapter1-digital-twins.md
+│   │   │   ├── chapter2-gazebo.md
+│   │   │   ├── chapter3-sensors.md
+│   │   │   ├── chapter4-unity.md
+│   │   │   ├── chapter5-environments.md
+│   │   │   └── troubleshooting.md
+│   │   ├── module3-ai-brain/      # Module 3: NVIDIA Isaac
+│   │   │   ├── chapter1-isaac-ecosystem.md
+│   │   │   ├── chapter2-synthetic-data.md
+│   │   │   ├── chapter3-perception.md
+│   │   │   ├── chapter4-navigation.md
+│   │   │   ├── chapter5-reinforcement-learning.md
+│   │   │   └── troubleshooting.md
+│   │   └── module4-vla/           # Module 4: VLA
+│   │       ├── chapter1-vla-introduction.md
+│   │       ├── chapter2-voice-to-action.md
+│   │       ├── chapter3-cognitive-planning.md
+│   │       ├── chapter4-multimodal.md
+│   │       ├── chapter5-capstone.md
+│   │       └── troubleshooting.md
+│   ├── capstone/                  # Capstone Project
+│   │   └── capstone-project.md
+│   └── appendix/                  # Appendix
+│       ├── hardware-requirements.md
+│       ├── tools-setup.md
+│       └── lab-setup.md
 ├── static/
-│   ├── img/
-│   │   └── book/ (all book images, as per constitution)
-│   │       ├── module-1/
-│   │       │   └── (images for module 1 chapters)
-│   │       ├── module-2/
-│   │       │   └── (images for module 2 chapters)
-│   │       ├── module-3/
-│   │       │   └── (images for module 3 chapters)
-│   │       └── module-4/
-│   │           └── (images for module 4 chapters)
-│   └── ...
-├── templates/
-│   └── chapter-template.md (template for all chapters)
-├── .specify/
-│   └── templates/
-│       └── chapter-template.md (specification template)
-├── .github/
-│   └── workflows/
-│       └── deploy.yml (GitHub Actions workflow)
-├── docusaurus.config.js
-├── sidebars.js
-├── bibliography.md
-└── ...
+│   └── img/
+│       └── book/                  # All book images
+│           ├── module1/
+│           ├── module2/
+│           ├── module3/
+│           └── module4/
+├── src/
+│   └── css/
+│       └── custom.css             # Custom styling
+├── sidebars.js                    # Navigation structure
+├── docusaurus.config.js           # Site configuration
+└── package.json                   # Dependencies
 ```
 
-### Content Delivery Pipeline
-1.  **Spec**: Detailed specifications for each module and chapter are created using Spec-Kit Plus.
-2.  **Draft**: Claude Code assists in generating initial content drafts based on the chapter specs and research findings.
-3.  **Review**: Human author reviews, edits, and refines content for accuracy, clarity, and technical rigor.
-4.  **Commit**: Approved changes are committed to a feature branch.
-5.  **Build**: Docusaurus builds the static site.
-6.  **Deploy**: GitHub Actions deploys the static site to GitHub Pages.
-
-### Toolchain Interactions
--   **Spec-Kit Plus**: Used for defining the `constitution.md`, `spec.md`, `plan.md`, `tasks.md`, `workflow.md`, and `style-guide.md`.
--   **Claude Code**: Functions as an AI assistant for content generation, research extraction, summarization, grammar/consistency checks, and revisions.
--   **GitHub**: Version control for the entire project, hosting the Docusaurus source and managing pull requests.
--   **GitHub Pages**: Static site hosting for the published Docusaurus book.
--   **Docusaurus build engine**: Compiles Markdown files and React components into a static HTML/CSS/JS website.
-
-### Automated Deployment Workflow (GitHub Actions)
-A GitHub Actions workflow will be configured to:
-1.  Trigger on pushes to the `main` branch or specific release branches.
-2.  Install Node.js dependencies.
-3.  Build the Docusaurus site.
-4.  Deploy the generated static files to the `gh-pages` branch.
-
-### Version Control Flow
--   **Feature Branches**: Each module or major feature (e.g., /sp.spec.module1, /sp.spec.module2) will have its own feature branch (e.g., `001-physical-ai-book`).
--   **Main Branch**: Represents the stable, reviewed version of the book's source code. Merges from feature branches occur after review.
--   **gh-pages Branch**: Automatically updated by GitHub Actions with the built Docusaurus site for public deployment.
+**Structure Decision**: Docusaurus static site with modular chapter organization. Each module contains 5 content chapters plus a troubleshooting section (FR-022).
 
 ---
 
-## 2. Section Structure for Every Chapter
+## Architecture Decisions
 
-Each chapter will adhere to the following uniform internal structure:
+### ADR-001: Documentation Platform Choice
 
--   **Learning Objectives**: 2-3 concise statements outlining what the reader will learn.
--   **Key Concepts**: A bulleted list of essential terms and ideas introduced in the chapter.
--   **Introduction**: Overview of the chapter's topic and its relevance.
--   **Sub-sections**:
-    -   Pattern: `## Main Section Title`, `### Sub-section Title`, `#### Detail Sub-section Title`.
-    -   Each sub-section will cover a specific aspect of the chapter's topic, including explanations, code examples, diagrams, and illustrations.
-    -   **Code Examples**: Must be Python-based using `rclpy` where applicable (for ROS 2 modules), syntactically valid (URDF/SDF), and runnable. All code blocks MUST include language identifiers.
-    -   **Diagrams/Illustrations**: Text-based ASCII diagrams or references to images in `/static/img/book/` for conceptual clarity, simulation setups, and architectural overviews.
--   **Citations**: In-text citations using APA style, with a full bibliography at the end of the chapter.
--   **Summary**: A brief recap of the chapter's main points.
--   **Review Questions/Exercises**: Optional, for reinforcing learning.
--   **Expected Length**: Chapters will aim for 2,000-5,000 words, contributing to the overall book length of 30,000–50,000 words across 10-20 chapters.
--   **Required Research Depth**: Each section will necessitate research from peer-reviewed sources (minimum 40%), technical documentation, and authoritative industry guides to ensure accuracy and rigor.
+**Decision**: Docusaurus 3.x
+
+**Options Considered**:
+| Option | Pros | Cons |
+|--------|------|------|
+| Docusaurus | React-based, excellent versioning, MDX support, active community | Requires Node.js knowledge |
+| MkDocs | Python-based, simple, Material theme | Limited interactivity, weaker plugin ecosystem |
+| GitBook | Beautiful UI, easy setup | Commercial limits, less customization |
+| Sphinx | Mature, excellent for API docs | Steeper learning curve, RST-focused |
+
+**Rationale**: Docusaurus provides the best balance of customization, community support, and modern web features. MDX support enables interactive code examples. Already in use in this project.
 
 ---
 
-## 3. Research Approach (Research-Concurrent Workflow)
+### ADR-002: Deployment Pipeline
 
-The research approach will follow a "research-concurrent" workflow:
--   **Just-in-Time Research**: Research will be conducted while writing each chapter, rather than all upfront, to ensure the most current and relevant information is integrated.
--   **Source Quality**: Prioritize peer-reviewed academic sources (minimum 50% of references), official documentation (ROS 2, Gazebo, Unity, NVIDIA Isaac), and reputable industry whitepapers.
--   **Citation Style**: All citations will follow APA style, as mandated by the Constitution.
--   **Bibliography Management**: A running bibliography file (`bibliography.md` or similar) will be maintained to track all sources used across the book. Integration with Zotero/RefWorks is optional, but citation data must be exportable to APA format.
--   **Claim Verification**: All factual claims will be verified with primary sources to ensure accuracy and reproducibility.
--   **Original Summaries**: Summaries and explanations derived from research will be original and non-plagiarized, reflecting a deep understanding of the source material.
--   **Claude Code for Literature Extraction + Summarization**: Claude Code will be utilized to extract key information from research papers and online articles, and to generate concise, accurate summaries for integration into the book content.
+**Decision**: GitHub Actions → GitHub Pages
+
+**Pipeline Design**:
+```yaml
+trigger: push to main branch
+steps:
+  1. Checkout code
+  2. Setup Node.js 18
+  3. Install dependencies (npm ci)
+  4. Run link checker
+  5. Build Docusaurus (npm run build)
+  6. Deploy to GitHub Pages
+```
+
+**Rationale**: Native GitHub integration, free hosting, automatic SSL, simple configuration.
 
 ---
 
-## 4. Quality Validation Framework
+### ADR-003: Citation Management
 
-The book's quality will be ensured through a multi-faceted framework combining automated checks and human review:
+**Decision**: Manual APA citations with structured reference sections
+
+**Options Considered**:
+| Option | Pros | Cons |
+|--------|------|------|
+| Manual APA | Simple, no tooling required | Manual effort, potential inconsistency |
+| BibTeX + Pandoc | Automated formatting | Complex toolchain, Docusaurus integration issues |
+| Zotero integration | Full citation management | External dependency, overkill for this scope |
+
+**Rationale**: Given the book's scope (25+ sources) and Docusaurus constraints, manual APA with consistent templates is most practical. Each chapter ends with a "References" section.
+
+---
+
+### ADR-004: Image Generation Workflow
+
+**Decision**: Combination of diagrams-as-code (Mermaid) and static images
+
+**Workflow**:
+1. **Mermaid diagrams**: For flowcharts, sequence diagrams, architecture diagrams (embedded in MDX)
+2. **Static images**: For screenshots, photos, complex illustrations (stored in `/static/img/book/`)
+3. **ASCII art**: For simple inline illustrations in code blocks
+
+**Rationale**: Mermaid provides version-controlled, editable diagrams. Static images handle screenshots and complex visuals.
+
+---
+
+### ADR-005: Interactive Components
+
+**Decision**: Limited interactivity via MDX components
+
+**Included**:
+- Collapsible code blocks (for long examples)
+- Tabbed content (for multi-platform instructions)
+- Admonitions (tips, warnings, notes)
+
+**Excluded**:
+- Live code execution (complexity, security)
+- Interactive simulations (scope creep)
+
+**Rationale**: Focus on content quality over interactive features. Interactivity limited to enhancing readability.
+
+---
+
+### ADR-006: AI Assistance Guidelines
+
+**Decision**: Claude Code as writing assistant with human verification
+
+**Anti-Hallucination Measures**:
+1. **Source-first writing**: All technical claims must reference official documentation
+2. **Code testing**: All examples validated before inclusion
+3. **Human review**: Each chapter reviewed against spec before merge
+4. **Citation verification**: Every citation manually verified
+
+**Rationale**: AI accelerates writing but requires verification to maintain accuracy standards.
+
+---
+
+### ADR-007: Branching Strategy
+
+**Decision**: Feature branch workflow
+
+```text
+main (protected)
+  └── 001-physical-ai-book (feature branch)
+        ├── module1-ros2 (sub-branch, optional)
+        ├── module2-digital-twin
+        ├── module3-ai-brain
+        └── module4-vla
+```
+
+**Workflow**:
+1. All work on `001-physical-ai-book` branch
+2. Sub-branches for parallel module development (optional)
+3. PR to main after full review
+4. Squash merge to maintain clean history
+
+---
+
+## Content Structure Pattern
+
+### Module Template
+
+```markdown
+---
+sidebar_position: [N]
+---
+
+# Module [N]: [Title]
+
+## Overview
+[Module introduction, learning objectives, prerequisites]
+
+## Hardware Requirements
+[CPU, GPU, RAM, storage requirements for this module]
+
+## Chapters
+1. [Chapter 1 link]
+2. [Chapter 2 link]
+...
+
+## Key Concepts
+[Bulleted list of main concepts covered]
+
+## What You'll Build
+[Description of hands-on projects in this module]
+```
+
+### Chapter Template
+
+```markdown
+---
+sidebar_position: [N]
+---
+
+# Chapter [N]: [Title]
+
+## Learning Objectives
+- [Objective 1]
+- [Objective 2]
+- [Objective 3]
+
+## Prerequisites
+- [Prereq 1]
+- [Prereq 2]
+
+## [Section 1]
+[Content with code examples, diagrams]
+
+### Code Example: [Name]
+```python
+# Example code
+```
+
+## [Section 2]
+...
+
+## Summary
+[Key takeaways]
+
+## Exercises
+1. [Exercise 1]
+2. [Exercise 2]
+
+## References
+- [APA citation 1]
+- [APA citation 2]
+```
+
+### Troubleshooting Section Template (FR-022)
+
+```markdown
+---
+sidebar_position: 99
+---
+
+# Troubleshooting: Module [N]
+
+## Common Issues
+
+### Issue: [Problem Description]
+**Symptoms**: [What the user sees]
+**Cause**: [Why it happens]
+**Solution**: [Step-by-step fix]
+
+### Issue: [Problem Description]
+...
+
+## Error Messages Reference
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| [Error text] | [Cause] | [Fix] |
+
+## Getting Help
+- [Community resources]
+- [Official documentation links]
+```
+
+---
+
+## Research Methodology
+
+### Source Hierarchy
+
+1. **Primary Sources** (Highest priority)
+   - Official documentation (ROS 2, NVIDIA, Unity)
+   - GitHub repositories (official examples)
+   - Technical specifications (DDS, URDF)
+
+2. **Secondary Sources**
+   - Peer-reviewed papers (IEEE, ACM)
+   - Technical books (O'Reilly, Springer)
+   - Conference proceedings (ICRA, IROS)
+
+3. **Tertiary Sources** (Supporting only)
+   - Tutorial blogs (verified accuracy)
+   - Community wikis (cross-referenced)
+
+### Citation Requirements
+
+- **Minimum 25 sources** across the book
+- **40% peer-reviewed** academic references
+- **APA 7th edition** format
+- **In-text citations** for specific claims
+- **End-of-chapter references** section
+
+---
+
+## Quality & Validation Framework
 
 ### Automated Checks
--   **Accuracy (Factual Verification)**:
-    -   **Source Traceability Test**: Each claim must be linked to a verifiable source. Automated checks will flag statements lacking in-text citations.
-    -   **Technical Correctness**: Code examples will be automatically tested for syntax errors and execution (e.g., ROS 2 nodes, URDF parsing).
--   **Clarity**:
-    -   **Readability Metrics**: Automated tools will calculate Flesch-Kincaid grade levels for each chapter, aiming for a consistent grade 9–12.
-    -   **Grammar/Consistency**: Claude Code revisions will be employed for grammar, spelling, and stylistic consistency, supplemented by linting tools for Markdown.
--   **Reproducibility**:
-    -   **Code Execution Tests**: Automated scripts will run all code examples to confirm they function as written.
--   **Formatting Consistency**:
-    -   **Markdown Linting**: `markdownlint` or similar will enforce consistent Markdown formatting across all chapters.
-    -   **Docusaurus Build**: The Docusaurus build process itself will act as a linting step, flagging broken links, image paths, and structural issues.
--   **Plagiarism**:
-    -   **Plagiarism Detection**: Automated tools will be used to ensure 0% plagiarism tolerance before finalization.
 
-### Human Checks
--   **Technical Rigor**: Human experts (reviewers) will verify the industry and academic correctness of technical explanations and examples.
--   **Content Quality**: Manual review will focus on logical flow, coherence, depth of explanation, and overall learning effectiveness.
--   **Formatting Consistency**: Visual inspection of the deployed Docusaurus site to ensure consistent rendering across devices and browsers.
--   **Proofreading**: Final human proofreading pass for any subtle errors missed by automated tools.
+| Check | Tool | Trigger |
+|-------|------|---------|
+| Markdown lint | markdownlint | Pre-commit |
+| Link validation | docusaurus build | CI |
+| Spelling | cspell | Pre-commit |
+| Code syntax | Prism highlighting | Build |
 
----
+### Manual Reviews
 
-## 5. Decisions Needing Documentation (with Options, Trade-offs, and Chosen Option)
+| Review | Reviewer | Checklist |
+|--------|----------|-----------|
+| Technical accuracy | Domain expert | Claims verified, code tested |
+| Content quality | Editor | Clarity, flow, consistency |
+| Spec compliance | Author | Requirements met |
+| Citation audit | Author | All sources verified |
 
-### 5.1 Choice of Docusaurus vs MkDocs vs GitBook
--   **Options**: Docusaurus, MkDocs, GitBook.
--   **Trade-offs**:
-    -   **Docusaurus**: Pros: React-based, highly customizable, excellent for technical documentation, built-in versioning, search, blog support. Cons: Steeper learning curve than MkDocs, more overhead for simple sites.
-    -   **MkDocs**: Pros: Simple, Python-based, easy to set up, good for basic documentation. Cons: Less customizable, limited features compared to Docusaurus, harder to extend with complex interactive components.
-    -   **GitBook**: Pros: User-friendly interface, good for non-technical authors, collaborative features. Cons: Often proprietary, less control over underlying tech stack, can be costly for commercial use.
--   **Chosen Option**: **Docusaurus**.
-    -   **Rationale**: Docusaurus aligns perfectly with the need for a highly customizable, technically robust platform suitable for a comprehensive technical book. Its React foundation allows for future interactive components, and its strong documentation features support the structured approach required.
+### Pre-Publication Checklist
 
-### 5.2 Deployment Pipeline Design
--   **Options**: Manual deployment, CI/CD with GitHub Actions, Netlify/Vercel integration.
--   **Trade-offs**:
-    -   **Manual**: Pros: Simple for small projects. Cons: Error-prone, slow, not scalable.
-    -   **GitHub Actions**: Pros: Free for public repos, integrated with GitHub, highly customizable, automated. Cons: Requires YAML configuration knowledge.
-    -   **Netlify/Vercel**: Pros: Extremely easy setup, good performance, serverless functions. Cons: Potential vendor lock-in, limited customization in free tiers.
--   **Chosen Option**: **CI/CD with GitHub Actions**.
-    -   **Rationale**: GitHub Actions provides a robust, free, and integrated solution for automated deployment to GitHub Pages, fulfilling the Constitution's requirement for deployment readiness. It offers granular control and fits within the existing GitHub-centric workflow.
-
-### 5.3 Structure of Modules and Chapters
--   **Options**: Flat structure (all chapters at root), hierarchical structure (modules contain chapters), chronological vs. thematic ordering.
--   **Trade-offs**:
-    -   **Flat**: Pros: Simple for small books. Cons: Hard to navigate large, multi-topic books.
-    -   **Hierarchical (Modular)**: Pros: Clear organization, easy navigation, reflects logical progression of topics. Cons: Slightly more complex setup initially.
--   **Chosen Option**: **Hierarchical, thematic modules containing chapters**.
-    -   **Rationale**: This structure (Modules → Chapters → Content Blocks) directly supports the logical progression of Physical AI concepts as outlined in the `spec.md`, ensuring clarity and ease of navigation for readers.
-
-### 5.4 Citation Management Method
--   **Options**: Manual APA formatting, Zotero/RefWorks integration, Markdown-based citation tools.
--   **Trade-offs**:
-    -   **Manual**: Pros: Full control. Cons: Time-consuming, error-prone for large bibliographies.
-    -   **Zotero/RefWorks**: Pros: Automated formatting, easy source management. Cons: External tool dependency, potential integration challenges with Docusaurus Markdown.
-    -   **Markdown-based tools**: Pros: Native to Markdown workflow. Cons: Less mature, might lack advanced features of dedicated citation managers.
--   **Chosen Option**: **Manual APA formatting with a running bibliography file, supported by Claude Code for formatting assistance**. Zotero/RefWorks is optional for source gathering but final output must be pure Markdown APA.
-    -   **Rationale**: While Zotero offers convenience, ensuring seamless integration with Docusaurus and a pure Markdown workflow is paramount. Claude Code can assist with adhering to APA guidelines, and a centralized bibliography file ensures consistency without external tool dependencies for the final render.
-
-### 5.5 Image Generation Workflow
--   **Options**: Manual creation (tools like draw.io, Mermaid.js for diagrams), AI-generated images, combination.
--   **Trade-offs**:
-    -   **Manual**: Pros: Precise control, high quality. Cons: Time-consuming.
-    -   **AI-generated**: Pros: Fast, diverse styles. Cons: Consistency issues, factual accuracy concerns, need for careful prompting.
-    -   **Combination**: Pros: Balance of speed and quality. Cons: Requires managing multiple tools.
--   **Chosen Option**: **Combination of Mermaid.js (for architectural diagrams within Markdown), manual creation for complex illustrations (using standard graphics software), and AI-assisted generation for conceptual images (with strict human review for accuracy)**. All images will be stored in `/static/img/book/`.
-    -   **Rationale**: Mermaid.js allows diagrams to be version-controlled directly within Markdown, promoting reproducibility. Manual tools ensure high-quality, precise technical diagrams. AI assistance speeds up conceptual image creation, but requires human oversight to prevent hallucinations.
-
-### 5.6 Whether to Include Interactive Components
--   **Options**: Static content only, simple interactive elements (code sandboxes, collapsible sections), complex simulations/3D models.
--   **Trade-offs**:
-    -   **Static**: Pros: Simplest to implement, widest compatibility. Cons: Less engaging.
-    -   **Simple Interactive**: Pros: Increased engagement, clearer explanations. Cons: Adds development complexity (React components).
-    -   **Complex Simulations**: Pros: Highly immersive. Cons: Significant development effort, performance concerns, browser compatibility.
--   **Chosen Option**: **Initially static content with a plan for simple interactive elements (e.g., live code sandboxes for Python/ROS 2 examples, collapsible sections) in future iterations if deemed beneficial for learning.**
-    -   **Rationale**: Prioritizing core content creation and stable deployment (Phase 1-4) is critical. Docusaurus's React foundation allows for adding interactive components later without a major architectural shift, enabling incremental enhancement.
-
-### 5.7 How AI Tools Assist Without Hallucinating
--   **Options**: AI for drafting only, AI for factual extraction (WebFetch), AI for summarization, AI for stylistic/grammar checks.
--   **Trade-offs**:
-    -   **Drafting only**: Pros: Speeds up initial writing. Cons: High risk of hallucination if not fact-checked rigorously.
-    -   **Factual extraction/summarization**: Pros: Reduces research time, provides structured information. Cons: Still requires human verification of accuracy.
-    -   **Stylistic/grammar checks**: Pros: Improves writing quality. Cons: AI might suggest stylistic changes that conflict with the established style guide.
--   **Chosen Option**: **Claude Code will primarily assist with factual extraction (using WebSearch/WebFetch), summarization of research materials, drafting initial content blocks (which will undergo strict human review for accuracy), and performing grammar/consistency checks against the style guide.**
-    -   **Rationale**: Leveraging Claude Code for these specific tasks maximizes its utility while mitigating the risk of hallucination through human oversight, source verification, and adherence to the quality framework.
-
-### 5.8 Branching Strategy and Commit Workflow
--   **Options**: GitFlow, GitHub Flow, Trunk-Based Development.
--   **Trade-offs**:
-    -   **GitFlow**: Pros: Strict release management. Cons: Complex, overkill for this project.
-    -   **GitHub Flow**: Pros: Simple, continuous deployment-friendly. Cons: Less formal release process.
-    -   **Trunk-Based**: Pros: Fast iteration, continuous integration. Cons: Requires very high test coverage.
--   **Chosen Option**: **GitHub Flow with feature branches for each module/major feature (`001-physical-ai-book`), merging into `main` after review, and automated deployment to `gh-pages` branch.**
-    -   **Rationale**: GitHub Flow is well-suited for a project with continuous content creation and deployment. Feature branches (`001-physical-ai-book`) provide isolation for module development, and merging into `main` ensures a stable base before deployment.
+- [ ] All code examples tested and working
+- [ ] All links validated (internal and external)
+- [ ] All images have alt text
+- [ ] All citations in APA format
+- [ ] Plagiarism scan passed (0%)
+- [ ] Flesch-Kincaid Grade 9–12 achieved
+- [ ] Hardware requirements documented per module
+- [ ] Troubleshooting sections complete
+- [ ] Docusaurus builds without warnings
 
 ---
 
-## 6. Testing Strategy (Acceptance Tests Aligned with Constitution)
+## Testing Strategy
 
-The testing strategy will incorporate both automated and manual checks to ensure all aspects of the book's quality and functionality.
+### Source Traceability Test
+**Method**: Each factual claim linked to citation
+**Acceptance**: 100% claims traceable
 
--   ***Source Traceability Test***:
-    -   **Description**: Every factual claim in the book must map to a credible, cited source.
-    -   **Methodology**: Automated script to check for in-text citations for all factual assertions. Manual review to verify the quality and relevance of cited sources.
-    -   **Tools**: Custom Python script, human review.
+### APA Citation Test
+**Method**: Manual review against APA 7th edition
+**Acceptance**: All citations properly formatted
 
--   ***APA Citation Test***:
-    -   **Description**: All citations and bibliography entries must adhere strictly to APA style guidelines.
-    -   **Methodology**: Automated linting of bibliography entries and in-text citation format. Manual spot checks for complex cases.
-    -   **Tools**: Zotero/RefWorks export validation (if used), custom regex checks, human review.
+### Non-Plagiarism Test
+**Method**: Run through plagiarism detection tool
+**Acceptance**: 0% plagiarism score
 
--   ***Non-Plagiarism Test***:
-    -   **Description**: The book must score 0% plagiarism (excluding correctly cited quotes and common phrases).
-    -   **Methodology**: Content will be submitted to a plagiarism detection service before finalization.
-    -   **Tools**: Commercial/academic plagiarism detection software.
+### Content Quality Test
+**Method**: Readability analysis + peer review
+**Acceptance**: Flesch-Kincaid Grade 9–12, coherent flow
 
--   ***Content Quality Test***:
-    -   **Description**: Evaluates readability, coherence, logical flow, depth of explanation, and technical accuracy.
-    -   **Methodology**: Flesch-Kincaid readability score analysis (automated), peer review by subject matter experts, and editorial review for clarity and engagement.
-    -   **Tools**: Readability checkers, human reviewers.
+### Technical Deployment Test
+**Method**: CI/CD pipeline
+**Acceptance**:
+- Docusaurus builds without errors
+- GitHub Actions pipeline succeeds
+- All links resolve (< 1% broken)
+- All images load
 
--   ***Technical Deployment Test***:
-    -   **Description**: Ensures the Docusaurus project builds correctly and deploys successfully to GitHub Pages.
-    -   **Methodology**:
-        -   **Docusaurus Build Validation**: Automated execution of `npm run build` within the CI/CD pipeline, checking for zero errors or warnings.
-        -   **GitHub Actions Deployment Success**: Verification that the GitHub Actions workflow completes successfully, deploying to the `gh-pages` branch.
-        -   **Link and Image Resolution**: Automated check of all internal and external links, and image paths, to ensure no broken references on the deployed site.
-    -   **Tools**: GitHub Actions, `docusaurus build`, custom link checker.
+### Module Consistency Test
+**Method**: Template compliance check
+**Acceptance**: All chapters follow template structure
 
--   ***Module Consistency Test***:
-    -   **Description**: Verifies that all chapters within a module and across different modules adhere to the defined section structure pattern.
-    -   **Methodology**: Automated structural analysis of Markdown files against a predefined template. Manual review for subjective consistency aspects (tone, depth).
-    -   **Tools**: Custom script, human review.
+### Spec Compliance Test
+**Method**: Requirements traceability matrix
+**Acceptance**: All FR-* requirements addressed
 
--   ***Spec Compliance Test***:
-    -   **Description**: Each chapter and module must follow its corresponding `spec.md` exactly, fulfilling all functional requirements and acceptance criteria.
-    -   **Methodology**: Manual review of each chapter against its specification, cross-referencing requirements with implemented content.
-    -   **Tools**: Human review, `spec.md` documents.
+### Code Example Validation Test
+**Method**: Execute all code examples in target environment
+**Acceptance**: 100% examples run successfully
 
 ---
 
-## 7. Phase Organization (Mandatory)
+## Phase Organization
 
-#### Phase 1 — Research (Ongoing)
--   **Gather Preliminary Sources**: Identify and collect foundational academic papers, official documentation, and authoritative books relevant to Physical AI, ROS 2, Gazebo, Unity, NVIDIA Isaac, and VLA.
--   **Create Shared Citation Library**: Establish a common system (e.g., a shared Markdown bibliography file, potentially backed by Zotero/RefWorks) for managing all research sources in APA format.
--   **Identify Gaps in Existing Literature**: Conduct initial literature reviews to pinpoint areas where current knowledge is sparse or outdated, informing the unique contributions of the book.
--   **Evaluate Toolchain Capabilities**: Confirm the readiness and specific features of Spec-Kit Plus, Claude Code, Docusaurus, GitHub, and GitHub Pages for supporting the entire book creation and deployment workflow.
+### Phase 1 — Research
+**Duration**: Foundation work
+**Deliverables**:
+- [ ] Source bibliography (25+ sources identified)
+- [ ] Citation library organized by module
+- [ ] Gap analysis (missing topics identified)
+- [ ] Toolchain validation (all tools installed, versions confirmed)
+- [ ] Hardware requirements matrix
 
-#### Phase 2 — Foundation
--   **Finalize Architecture**: Document the detailed architecture sketch for the book structure, Docusaurus hierarchy, content pipeline, and toolchain interactions, incorporating all decisions from Section 5.
--   **Lock In Book Layout**: Confirm the high-level module and chapter organization based on the `spec.md` and `constitution.md`.
--   **Set Up Docusaurus Skeleton Project**: Initialize the Docusaurus project, configure `docusaurus.config.js` and `sidebar.js`, and establish the initial `docs/`, `src/`, and `static/` folder structures.
--   **Set Up GitHub Repo + Deployment Pipeline**: Create the GitHub repository, configure `main` and `gh-pages` branches, and implement the GitHub Actions CI/CD workflow for automated Docusaurus builds and deployments.
+**Key Activities**:
+- Gather official documentation for ROS 2 Humble, Gazebo Harmonic, Unity 2022 LTS, Isaac Sim 2023.1
+- Identify peer-reviewed papers on VLA, humanoid robotics, sim-to-real transfer
+- Validate all tool versions work together
+- Document minimum hardware requirements per module
 
-#### Phase 3 — Analysis
--   **Break Down Each Module into Detailed Chapter Specs**: For each module (ROS 2, Digital Twin, AI-Robot Brain, VLA), create individual `spec.md` files for each chapter, detailing learning objectives, core requirements, key concepts, specific examples, and constraints.
--   **Identify Required Citations and Media**: Based on chapter specs, outline the specific research papers, technical documentation, and images/diagrams needed for each chapter.
--   **Define Chapter Structure Templates**: Create Markdown templates that enforce the uniform chapter structure (Section 2) for consistency across all content.
+### Phase 2 — Foundation
+**Duration**: Setup work
+**Deliverables**:
+- [ ] Docusaurus project structure finalized
+- [ ] GitHub repository configured
+- [ ] CI/CD pipeline operational
+- [ ] Chapter templates created
+- [ ] Style guide documented
 
-#### Phase 4 — Synthesis
--   **Write Chapters Using Spec-Kit + Claude Code**: Authors (human and AI) will generate content for each chapter, adhering to the chapter specs and utilizing Claude Code for drafting, research summarization, and initial revisions.
--   **Validate with Quality Framework**: Each completed chapter will undergo thorough validation using the Quality Validation Framework (Section 4), including automated checks (readability, linting, plagiarism) and human review (technical rigor, clarity).
--   **Final Integration + QA**: Integrate all chapters into the Docusaurus project, perform a comprehensive end-to-end quality assurance pass, checking for consistency, broken links, and overall user experience.
--   **Deploy Final Docusaurus Site + PDF**: Build and deploy the final Docusaurus static site to GitHub Pages. Generate and provide instructions for exporting the book to PDF format.
+**Key Activities**:
+- Finalize folder structure
+- Configure sidebars.js for navigation
+- Set up GitHub Actions workflow
+- Create reusable MDX components
+- Document writing conventions
+
+### Phase 3 — Analysis
+**Duration**: Planning work
+**Deliverables**:
+- [ ] Detailed chapter specifications (20 chapters)
+- [ ] Required citations per chapter
+- [ ] Required diagrams per chapter
+- [ ] Code example inventory
+
+**Key Activities**:
+- Break down each module into detailed chapter specs
+- Identify 3+ code examples per chapter (FR constraints)
+- Plan diagrams and illustrations
+- Map citations to chapters
+
+### Phase 4 — Synthesis
+**Duration**: Content creation
+**Deliverables**:
+- [ ] All chapters written
+- [ ] All code examples tested
+- [ ] All diagrams created
+- [ ] Troubleshooting sections complete
+- [ ] Final QA passed
+- [ ] Deployed to GitHub Pages
+
+**Key Activities**:
+- Write chapters using Claude Code assistance
+- Test all code examples in target environments
+- Create Mermaid diagrams and static images
+- Peer review and revision
+- Final plagiarism and quality checks
+- Deploy and validate
+
+---
+
+## Risk Analysis
+
+| Risk | Impact | Likelihood | Mitigation |
+|------|--------|------------|------------|
+| Tool version incompatibility | High | Medium | Pin versions, test early |
+| Code examples fail in different environments | High | Medium | Test on multiple systems |
+| Citation sources become unavailable | Medium | Low | Archive key sources |
+| Scope creep | Medium | High | Strict spec adherence |
+| AI hallucination in content | High | Medium | Source verification process |
+
+---
+
+## Deliverables Summary
+
+| Artifact | Location | Status |
+|----------|----------|--------|
+| Implementation Plan | `specs/001-physical-ai-book/plan.md` | ✅ Complete |
+| Research Document | `specs/001-physical-ai-book/research.md` | 🔄 Next |
+| Content Model | `specs/001-physical-ai-book/data-model.md` | Pending |
+| Chapter Templates | `specs/001-physical-ai-book/contracts/` | Pending |
+| Quickstart Guide | `specs/001-physical-ai-book/quickstart.md` | Pending |
+| Task Breakdown | `specs/001-physical-ai-book/tasks.md` | Pending (/sp.tasks) |
+
+---
+
+**Next Command**: `/sp.tasks` to generate the detailed task breakdown

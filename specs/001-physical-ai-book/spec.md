@@ -276,6 +276,9 @@ The user, as a robotics student, wants to understand how LLMs, Whisper, and mult
 - **FR-018**: The book MUST demonstrate LLM-based cognitive planning (task decomposition).
 - **FR-019**: The book MUST cover multi-modal interaction (vision, language, gestures, proprioception).
 - **FR-020**: The book MUST define a Capstone Architecture for an autonomous humanoid (Voice → Plan → Navigate → Detect → Manipulate).
+- **FR-021**: The book MUST include detailed hardware requirements (CPU, GPU, RAM, storage) for each module, enabling readers to verify system compatibility before starting.
+- **FR-022**: Each module MUST include a troubleshooting subsection covering common errors, failure modes, and their solutions.
+- **FR-023**: The book MUST pin specific versions of all external tools: ROS 2 Humble Hawksbill, Gazebo Harmonic, Unity 2022 LTS, Isaac Sim 2023.1, to ensure reproducibility.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -306,6 +309,12 @@ The user, as a robotics student, wants to understand how LLMs, Whisper, and mult
 - Q: What are the distinct roles of Gazebo vs Unity in the book? → A: Gazebo for physics simulation, Unity for high-fidelity visualization
 - Q: Which LLM should be used with Whisper for the VLA system? → A: Open Source LLM (e.g., Llama 3)
 - Q: What type of navigation should be emphasized? → A: Humanoid-specific navigation with bipedal locomotion constraints
+
+### Session 2025-12-30
+
+- Q: Should the book include explicit hardware requirements and minimum system specifications? → A: Yes, include detailed hardware specs (CPU, GPU, RAM, storage) per module
+- Q: Should each module include a dedicated troubleshooting section? → A: Yes, each module includes a troubleshooting subsection with common errors
+- Q: Should the book pin specific versions of external tools or provide version ranges? → A: Pin specific versions (Gazebo Harmonic, Unity 2022 LTS, Isaac Sim 2023.1)
 
 
 - **SC-001**: The published Docusaurus book compiles without warnings or broken links.

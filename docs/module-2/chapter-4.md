@@ -36,10 +36,10 @@ This chapter explores how to set up Unity for robotics applications, integrate i
 
 ### Unity Installation and Robotics Package
 
-To get started with Unity for robotics, install Unity Hub and the latest LTS (Long Term Support) version:
+To get started with Unity for robotics, install Unity Hub and the 2022 LTS version:
 
 1. Download Unity Hub from https://unity3d.com/get-unity/download
-2. Through Unity Hub, install Unity 2021.3 LTS or later
+2. Through Unity Hub, install **Unity 2022.3 LTS** (2022 LTS)
 3. Install the Unity Robotics Package through the Package Manager
 
 ### Unity-ROS Integration Architecture

@@ -82,12 +82,18 @@ Gazebo's architecture consists of several key components working together:
 To install Gazebo for ROS 2 Humble:
 
 ```bash
-# Install Gazebo Garden (recommended for ROS 2 Humble)
+# Install Gazebo Harmonic (recommended for ROS 2 Humble)
 sudo apt update
-sudo apt install ros-humble-gazebo-ros-pkgs ros-humble-gazebo-plugins
 
-# Or install the full desktop version
-sudo apt install ros-humble-gazebo-dev ros-humble-gazebo-plugins ros-humble-gazebo-ros
+# Add Gazebo repository
+sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install gz-harmonic
+
+# Install ROS-Gazebo integration
+sudo apt install ros-humble-ros-gz
 ```
 
 Verify the installation:

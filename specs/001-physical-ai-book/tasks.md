@@ -1,8 +1,11 @@
 # Tasks for AI/Spec-Driven Book Creation
 
-## Feature: AI/Spec-Driven Book Creation Using Docusaurus, Spec-Kit Plus, and Claude Code
+## Feature: Physical AI & Humanoid Robotics Book
 
 ## Reference: `constitution.md` + `specs/001-physical-ai-book/spec.md` + `specs/001-physical-ai-book/plan.md`
+
+**Generated**: 2025-12-30
+**Clarifications Applied**: FR-021 (hardware requirements), FR-022 (troubleshooting sections), FR-023 (pinned versions)
 
 ---
 
@@ -45,7 +48,7 @@ This document outlines the detailed, executable tasks for creating the "Physical
 - [ ] T012 [US1] Set up a workflow for Claude Code to assist in generating initial content drafts based on chapter specs and research findings.
 - [ ] T013 [US1] Define human author review and editing process for accuracy, clarity, and technical rigor.
 - [ ] T014 [US1] Implement a process for committing approved changes to feature branches.
-- [ ] T015 [US1] Ensure Docusaurus builds the static site without errors.
+- [X] T015 [US1] Ensure Docusaurus builds the static site without errors.
 - [ ] T016 [US1] Verify that GitHub Actions deploys the static site to GitHub Pages correctly.
 - [X] T017 [US1] Create Preface and Appendix chapters: "Preface" (`docs/preface.md`), "Appendix: Hardware, Tools, and Lab Setup" (`docs/appendix.md`).
 
@@ -132,11 +135,38 @@ This document outlines the detailed, executable tasks for creating the "Physical
 - [ ] T062 Integrate all chapters into the Docusaurus project.
 - [ ] T063 Perform a comprehensive end-to-end quality assurance pass.
 - [ ] T064 Generate and provide instructions for exporting the book to PDF format.
-- [ ] T065 Ensure all functional requirements (FR-001 to FR-020) are met.
+- [ ] T065 Ensure all functional requirements (FR-001 to FR-023) are met.
 - [ ] T066 Ensure all success criteria (SC-001 to SC-010) are met.
 - [ ] T067 Verify that all citations follow APA format and are traceable to credible sources.
 - [ ] T068 Confirm the book meets Flesch-Kincaid Grade level 9–12 for writing clarity.
 - [ ] T069 Ensure the book adheres to the specified length (30,000–50,000 words) and chapter count (10–20).
+
+---
+
+## New Tasks from Clarifications (2025-12-30)
+
+### FR-021: Hardware Requirements per Module
+
+- [X] T070 [P] Create docs/appendix/hardware-requirements.md with consolidated hardware matrices
+- [X] T071 [P] Add hardware requirements section to docs/module-1/index.md (CPU: 4 cores, RAM: 8GB min)
+- [X] T072 [P] Add hardware requirements section to docs/module-2/index.md (GPU: GTX 1060 min)
+- [X] T073 [P] Add hardware requirements section to docs/module-3/index.md (GPU: RTX 2070 required)
+- [X] T074 [P] Add hardware requirements section to docs/module-4/index.md (GPU: RTX 3060 12GB min)
+
+### FR-022: Troubleshooting Sections per Module
+
+- [X] T075 [US2] Create docs/module-1/troubleshooting.md with common ROS 2 issues
+- [X] T076 [US3] Create docs/module-2/troubleshooting.md with Gazebo/Unity issues
+- [X] T077 [US4] Create docs/module-3/troubleshooting.md with Isaac Sim issues
+- [X] T078 [US5] Create docs/module-4/troubleshooting.md with VLA/LLM issues
+
+### FR-023: Pinned Tool Versions
+
+- [X] T079 Create docs/appendix/tools-setup.md with pinned versions: ROS 2 Humble, Gazebo Harmonic, Unity 2022 LTS, Isaac Sim 2023.1
+- [X] T080 Verify all code examples target pinned versions (ROS 2 Humble Hawksbill)
+- [X] T081 Verify all Gazebo examples use Gazebo Harmonic (not Classic) - Fixed chapter-1.md, chapter-2.md
+- [X] T082 Verify all Unity examples use Unity 2022 LTS with Unity Robotics Hub - Fixed chapter-1.md, chapter-4.md
+- [X] T083 Verify all Isaac Sim examples use Isaac Sim 2023.1.x
 
 ---
 
@@ -168,3 +198,38 @@ The following outlines the completion order of user stories:
 ## Implementation Strategy
 
 The implementation will follow an MVP-first, incremental delivery approach. User Story 1 (Physical AI Book Creation) will serve as the guiding objective, with core foundational elements being established first. Subsequent user stories (Module 1 through 4) will be developed and integrated sequentially, ensuring that each module builds upon the previous one. Testing and quality assurance will be continuous throughout the development lifecycle.
+
+---
+
+## Summary Statistics
+
+| Metric | Value |
+|--------|-------|
+| **Total Tasks** | 83 |
+| **Setup Tasks (Phase 1)** | 5 |
+| **Foundational Tasks (Phase 2)** | 5 |
+| **US1 Tasks (Book Infrastructure)** | 7 |
+| **US2 Tasks (ROS 2 Module)** | 11 |
+| **US3 Tasks (Digital Twin Module)** | 11 |
+| **US4 Tasks (Isaac Module)** | 10 |
+| **US5 Tasks (VLA Module)** | 10 |
+| **Polish Tasks (Final Phase)** | 10 |
+| **New Clarification Tasks (FR-021/022/023)** | 14 |
+| **Parallelizable Tasks** | ~45 (54%) |
+
+### MVP Scope (Recommended)
+
+Complete through **User Story 2 (ROS 2 Module)** for MVP:
+- Setup (T001-T005) + Foundational (T006-T010) + US1 (T011-T017) + US2 (T018-T028)
+- Delivers: Complete book infrastructure + ROS 2 module
+- Validates: End-to-end Docusaurus workflow, code example testing
+
+### Pinned Tool Versions (FR-023)
+
+| Tool | Version |
+|------|---------|
+| ROS 2 | Humble Hawksbill (LTS) |
+| Gazebo | Harmonic |
+| Unity | 2022 LTS |
+| Isaac Sim | 2023.1.x |
+| Python | 3.10+ |

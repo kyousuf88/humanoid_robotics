@@ -70,3 +70,84 @@
 - **Whisper-ROS 2 Integration**: Develop a pipeline to convert speech to text, process intent, and trigger ROS 2 actions using open-source LLMs.
 - **LLM-ROS 2 Integration**: Implement an LLM as a cognitive planner, breaking down high-level tasks into sequences of ROS 2 actions.
 - **Multi-modal AI Integration**: Combine vision, language, and proprioceptive data for rich robot understanding and interaction.
+
+## Hardware Requirements Matrix (FR-021)
+
+### Module 1: ROS 2 (Minimum)
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| CPU | 4 cores | 8 cores |
+| RAM | 8 GB | 16 GB |
+| Storage | 50 GB | 100 GB |
+| GPU | Not required | NVIDIA for visualization |
+| OS | Ubuntu 22.04 | Ubuntu 22.04 |
+
+### Module 2: Digital Twin (Gazebo + Unity)
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| CPU | 6 cores | 8+ cores |
+| RAM | 16 GB | 32 GB |
+| Storage | 100 GB | 200 GB |
+| GPU | NVIDIA GTX 1060 | NVIDIA RTX 3060+ |
+| OS | Ubuntu 22.04 | Ubuntu 22.04 |
+
+### Module 3: NVIDIA Isaac
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| CPU | 8 cores | 12+ cores |
+| RAM | 32 GB | 64 GB |
+| Storage | 200 GB SSD | 500 GB NVMe |
+| GPU | NVIDIA RTX 2070 | NVIDIA RTX 3080+ |
+| OS | Ubuntu 22.04 | Ubuntu 22.04 |
+
+### Module 4: VLA (LLM + Speech)
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| CPU | 8 cores | 16 cores |
+| RAM | 32 GB | 64 GB |
+| Storage | 100 GB | 200 GB |
+| GPU | NVIDIA RTX 3060 (12GB) | NVIDIA RTX 4080+ |
+| OS | Ubuntu 22.04 | Ubuntu 22.04 |
+
+## Pinned Tool Versions (FR-023)
+
+| Tool | Version | Notes |
+|------|---------|-------|
+| ROS 2 | Humble Hawksbill (LTS) | Ubuntu 22.04 recommended |
+| Gazebo | Harmonic | Compatible with ROS 2 Humble |
+| Unity | 2022 LTS | Unity Robotics Hub required |
+| NVIDIA Isaac Sim | 2023.1.x | Requires RTX GPU |
+| Python | 3.10+ | For rclpy examples |
+
+## Source Bibliography
+
+### Primary Sources (Official Documentation)
+
+1. ROS 2 Documentation - https://docs.ros.org/en/humble/
+2. Gazebo Sim Documentation - https://gazebosim.org/docs/harmonic
+3. Unity Robotics Hub - https://github.com/Unity-Technologies/Unity-Robotics-Hub
+4. NVIDIA Isaac Sim Docs - https://docs.omniverse.nvidia.com/isaacsim/latest/
+5. NVIDIA Isaac ROS - https://nvidia-isaac-ros.github.io/
+6. Nav2 Documentation - https://navigation.ros.org/
+7. URDF Specification - http://wiki.ros.org/urdf/XML
+8. SDF Specification - http://sdformat.org/spec
+9. OpenAI Whisper - https://github.com/openai/whisper
+10. Llama 3 Documentation - https://llama.meta.com/
+
+### Secondary Sources (Academic)
+
+11. Quigley, M., et al. (2009). "ROS: an open-source Robot Operating System." ICRA Workshop.
+12. Koenig, N., & Howard, A. (2004). "Design and use paradigms for Gazebo." IEEE/RSJ IROS.
+13. Radford, A., et al. (2023). "Robust Speech Recognition via Large-Scale Weak Supervision." ICML.
+14. Touvron, H., et al. (2023). "LLaMA: Open and Efficient Foundation Language Models." arXiv.
+15. Brohan, A., et al. (2023). "RT-2: Vision-Language-Action Models." CoRL.
+16. Peng, X. B., et al. (2018). "Sim-to-Real Transfer with Dynamics Randomization." IEEE ICRA.
+17. Tobin, J., et al. (2017). "Domain Randomization for Sim-to-Real Transfer." IEEE/RSJ IROS.
+18. Macenski, S., et al. (2020). "The Marathon 2: A Navigation System." IEEE/RSJ IROS.
+19. Liang, J., et al. (2023). "Code as Policies: Language Model Programs." IEEE ICRA.
+
+**Research Status**: Complete - All clarifications resolved.

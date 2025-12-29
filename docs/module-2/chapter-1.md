@@ -35,14 +35,19 @@ To install Gazebo for ROS 2 Humble Hawksbill:
 # Update package list
 sudo apt update
 
-# Install Gazebo Garden (recommended for ROS 2 Humble)
-sudo apt install ros-humble-gazebo-ros-pkgs ros-humble-gazebo-plugins
+# Install Gazebo Harmonic (recommended for ROS 2 Humble)
+# Add Gazebo repository
+sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
 
-# Install additional Gazebo components
-sudo apt install ros-humble-gazebo-dev ros-humble-gazebo-ros ros-humble-gazebo-msgs
+sudo apt-get update
+sudo apt-get install gz-harmonic
+
+# Install ROS-Gazebo bridge
+sudo apt install ros-humble-ros-gz
 
 # Verify installation
-gz --version
+gz sim --version
 ```
 
 ### Unity Installation for Robotics
@@ -50,7 +55,7 @@ gz --version
 To set up Unity for robotics applications:
 
 1. Download and install Unity Hub from https://unity3d.com/get-unity/download
-2. Through Unity Hub, install Unity 2021.3 LTS or later
+2. Through Unity Hub, install Unity 2022.3 LTS (2022 LTS)
 3. Install the Unity Robotics packages:
    - ROS# (ROS Sharp): `https://github.com/siemens/ros-sharp.git`
    - Unity Robotics Hub (optional): Through Unity's Package Manager
@@ -69,9 +74,9 @@ ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 Before starting with digital twin development for humanoid robots, ensure you have:
 
 - **ROS 2 Humble Hawksbill** installed and configured
-- **Gazebo Garden** or later for physics simulation
-- **Unity 2021.3 LTS** or later for visualization
-- **Python 3.8+** for ROS 2 nodes and scripts
+- **Gazebo Harmonic** for physics simulation
+- **Unity 2022 LTS** (2022.3.x) for visualization
+- **Python 3.10+** for ROS 2 nodes and scripts
 - **Git LFS** for large asset management (if using Unity)
 - **Proper network configuration** for ROS Bridge communication
 
