@@ -38,7 +38,7 @@ const config = {
         docs: {
           sidebarPath: './sidebars.js',
           // Update to your actual GitHub repo
-          editUrl: 'https://github.com/kyousuf88/humanoid_robotics/tree/main/',
+          editUrl: 'https://github.com/kyousuf88/humanoid_robotics/tree/001-physical-ai-book/',
         },
         blog: false,
         theme: {
