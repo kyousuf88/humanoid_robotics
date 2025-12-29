@@ -10,7 +10,7 @@ const config = {
 
   // Production URL
   url: 'https://your-docusaurus-site.example.com',
-  baseUrl: '/docs/modules/module1-ros2/chapter1-introduction/',
+  baseUrl: '/',
 
   // GitHub Pages deployment
   organizationName: 'your-github-username',
@@ -78,7 +78,7 @@ const config = {
             items: [
               {
                 label: 'Module 1: ROS 2',
-                to: 'docs/intro',
+                to: '/docs/intro',
               },
               {
                 label: 'Module 2: Digital Twins (Coming Soon)',
